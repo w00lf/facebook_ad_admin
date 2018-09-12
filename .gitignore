@@ -21,3 +21,6 @@
 /yarn-error.log
 
 .byebug_history
+config/config_chr.json
+config/config.json
+config/currency_iso.json
