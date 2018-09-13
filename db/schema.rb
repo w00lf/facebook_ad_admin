@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910060955) do
+ActiveRecord::Schema.define(version: 20180913120002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 20180910060955) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "binom_campaigns", force: :cascade do |t|
+    t.string "binom_identificator"
+    t.string "facebook_campaign_identificator"
+    t.string "name"
+    t.bigint "facebook_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facebook_account_id"], name: "index_binom_campaigns_on_facebook_account_id"
+  end
+
   create_table "facebook_accounts", force: :cascade do |t|
     t.string "name"
     t.string "api_token"
@@ -65,5 +75,6 @@ ActiveRecord::Schema.define(version: 20180910060955) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "binom_campaigns", "facebook_accounts"
   add_foreign_key "facebook_accounts", "facebook_group_accounts"
 end

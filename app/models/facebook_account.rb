@@ -2,6 +2,7 @@ class FacebookAccount < ApplicationRecord
   validates :name, :api_identificator, :api_token, :api_secret, presence: true
   validate :correct_request
 
+  has_many :binom_campaigns
   belongs_to :facebook_group_account
 
   private

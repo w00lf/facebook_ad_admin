@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  binom_identificator: MyString
+  facebook_campaign_identificator: MyString
+  name: MyString
+  facebook_account: one
+
+two:
+  binom_identificator: MyString
+  facebook_campaign_identificator: MyString
+  name: MyString
+  facebook_account: two

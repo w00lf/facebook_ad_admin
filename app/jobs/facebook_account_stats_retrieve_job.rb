@@ -70,7 +70,10 @@ class FacebookAccountStatsRetrieveJob
     retry_count = 0
     yield
   rescue FacebookAds::ClientError => e
-    @logger.warn("Facebook client error: #{e.message}")
+    log_file = File.new(Rails.root.join('log', 'parser.log'), 'a+')
+    log_file.sync = true
+    logger = Logger.new(log_file)
+    logger.warn("Facebook client error: #{e.message}")
     if retry_count <= MAX_RETRIES && retriable_exception?(e)
       sleep 120 * retry_count
       retry
@@ -112,37 +115,48 @@ class FacebookAccountStatsRetrieveJob
     date = Time.at(date_unix)
     facebook_account  = FacebookAccount.find(facebook_account_id)
     time_range = { 'since' => date.strftime('%Y-%m-%d'),  'until' => date.strftime('%Y-%m-%d') }
-    @logger = Logger.new(File.new(Rails.root.join('tmp', 'parser.log'), 'a+'))
-    result = []
+    log_file = File.new(Rails.root.join('log', 'parser.log'), 'a+')
+    log_file.sync = true
+    logger = Logger.new(log_file)
     account_id = facebook_account.api_identificator
     session = FacebookAds::Session.new(access_token: facebook_account.api_token, app_secret: facebook_account.api_secret)
     ad_account = FacebookAds::AdAccount.get("act_#{account_id}", 'name', session)
     account_name = try_get_data(ad_account, 'name')
-    @logger.info("Scanning #{account_name}")
+    logger.info("Scanning #{account_name}")
     currency = ad_account.currency
     account_status = ACCOUNT_STATUS.fetch(try_get_data(ad_account, 'account_status'))
+    # Format - Binom` Hash[<camp_id><price>]
+    binom_costs_hash = Hash.new(0)
+    binom_campaigns = facebook_account.binom_campaigns
     result =  ad_account.adsets(time_range: time_range).map do |adset|
+                insight_data = adset.insights(fields: PERFORMANCE_FIELDS + ['inline_link_clicks'], time_range: time_range).first
                 # To not exceed requests quota
-                sleep 20
-                row = [account_status, time_range.fetch('since'), account_name]
+                sleep 15
+                next if insight_data.nil?
+                row = [account_status, date.strftime('%d/%m/%Y'), account_name]
                 FIELDS_TO_PULL.each {|field| row.push(try_get_data(adset, field)) }
+                # To not exceed requests quota
+                sleep 15
                 row.push(get_promoted_object_event_type(adset))
                 row.push(get_budget(adset, currency))
-                insight_data = adset.insights(fields: PERFORMANCE_FIELDS + ['inline_link_clicks'], time_range: time_range).first
-                insights =  if insight_data
-                              PERFORMANCE_FIELDS_MONEY.map do |field|
-                                get_and_format_money(insight_data, field, currency)
-                              end + [get_and_format_percentage(insight_data, 'ctr')] + [(try_get_data(insight_data, 'inline_link_clicks'))]
-                            else
-                              ['-', '-', '-', '-', '-', '-']
-                            end
+
+                insights =  PERFORMANCE_FIELDS_MONEY.map do |field|
+                              get_and_format_money(insight_data, field, currency)
+                            end + [get_and_format_percentage(insight_data, 'ctr')] + [(try_get_data(insight_data, 'inline_link_clicks'))]
+                sleep 10
+                campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
+                if campaign
+                  binom_costs_hash[campaign.binom_identificator] += insight_data.spend.to_f
+                end
+                logger.warn("Cannot find campaign for id - #{adset.campaign.id}")
                 row.push(*insights)
-              end
-    @logger.info(result)
+              end.compact
+    logger.info(result)
     SendToGoogleSpreadsheetFacebookAccountJob.perform_async(date_unix, facebook_account_id, result, COLUMN_HEADERS)
-    # TODO: Change
-    campaign_id = 23
-    costs = 50
-    SendToBinomApiFacebookCampaignJob.perform_async(date_unix, campaign_id, costs)
+    logger.info(binom_costs_hash)
+    binom_costs_hash.each_pair do |campaign_id, costs|
+      SendToBinomApiFacebookCampaignJob.perform_async(date_unix, campaign_id, costs)
+    end
+    log_file.close
   end
 end

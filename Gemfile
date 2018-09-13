@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'sidekiq'
+gem 'config'
 
 # Integrations
 gem 'facebookbusiness', '0.3.1.1'
