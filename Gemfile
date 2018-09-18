@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'pg'
+gem 'pg', '1.0.0'
 gem 'activeadmin'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -36,6 +36,9 @@ gem 'config'
 # Integrations
 gem 'facebookbusiness', '0.3.1.1'
 gem 'google_drive', '2.1.11'
+
+gem 'money', '~>6.11.0'
+gem 'eu_central_bank'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

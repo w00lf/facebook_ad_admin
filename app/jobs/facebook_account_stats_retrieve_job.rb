@@ -126,7 +126,7 @@ class FacebookAccountStatsRetrieveJob
     currency = ad_account.currency
     account_status = ACCOUNT_STATUS.fetch(try_get_data(ad_account, 'account_status'))
     # Format - Binom` Hash[<camp_id><price>]
-    binom_costs_hash = Hash.new(0)
+    binom_costs_hash = {}
     binom_campaigns = facebook_account.binom_campaigns
     result =  ad_account.adsets(time_range: time_range).map do |adset|
                 insight_data = adset.insights(fields: PERFORMANCE_FIELDS + ['inline_link_clicks'], time_range: time_range).first
@@ -146,16 +146,17 @@ class FacebookAccountStatsRetrieveJob
                 sleep 10
                 campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
                 if campaign
-                  binom_costs_hash[campaign.binom_identificator] += insight_data.spend.to_f
+                  binom_costs_hash[campaign.binom_identificator] = { 'costs' => 0, 'currency' => currency } unless binom_costs_hash[campaign.binom_identificator]
+                  binom_costs_hash[campaign.binom_identificator]['costs'] += insight_data.spend.to_f
                 end
                 logger.warn("Cannot find campaign for id - #{adset.campaign.id}")
-                row.push(*insights)
+                break(row.push(*insights))
               end.compact
     logger.info(result)
     SendToGoogleSpreadsheetFacebookAccountJob.perform_async(date_unix, facebook_account_id, result, COLUMN_HEADERS)
     logger.info(binom_costs_hash)
-    binom_costs_hash.each_pair do |campaign_id, costs|
-      SendToBinomApiFacebookCampaignJob.perform_async(date_unix, campaign_id, costs)
+    binom_costs_hash.each_pair do |campaign_id, compaign_hash|
+      SendToBinomApiFacebookCampaignJob.perform_async(date_unix, campaign_id, compaign_hash['costs'], compaign_hash['currency'])
     end
     log_file.close
   end
