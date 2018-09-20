@@ -150,7 +150,7 @@ class FacebookAccountStatsRetrieveJob
                   binom_costs_hash[campaign.binom_identificator]['costs'] += insight_data.spend.to_f
                 end
                 logger.warn("Cannot find campaign for id - #{adset.campaign.id}")
-                break(row.push(*insights))
+                row.push(*insights)
               end.compact
     logger.info(result)
     SendToGoogleSpreadsheetFacebookAccountJob.perform_async(date_unix, facebook_account_id, result, COLUMN_HEADERS)
