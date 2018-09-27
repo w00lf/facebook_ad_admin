@@ -1,20 +1,6 @@
 class FacebookAccountStatsRetrieveJob
   include Sidekiq::Worker
 
-  FIELDS_TO_PULL = %w[
-    status
-    name
-  ]
-
-  PERFORMANCE_FIELDS = %w[
-    spend
-    cost_per_unique_click
-    cpm
-    cpc
-    ctr
-  ]
-
-  PERFORMANCE_FIELDS_MONEY = PERFORMANCE_FIELDS.reject {|n| n == 'ctr' }
   ACCOUNT_STATUS = {
     1 => 'Active',
     2 => 'Disabled',
@@ -44,9 +30,11 @@ class FacebookAccountStatsRetrieveJob
     'Clicks',
     'image/vid'
   ]
+  CONVERSION_TARGET_ACTION = 'offsite_conversion'.freeze
   MAX_RETRIES = 20
 
   def format_money(price, currency)
+    return '-' unless price
     "#{price} #{currency_info.fetch(currency.downcase).fetch("symbol")}"
   end
 
@@ -55,6 +43,7 @@ class FacebookAccountStatsRetrieveJob
   end
 
   def format_value(value)
+    return '-' unless value
     value.to_f.round(2)
   end
 
@@ -111,6 +100,11 @@ class FacebookAccountStatsRetrieveJob
     "#{format_value(attribute)} %"
   end
 
+  def adstats_type_value(adstats, action_type)
+    return unless adstats
+    adstats.find { |adstat| adstat.action_type == action_type }&.value
+  end
+
   def perform(date_unix, facebook_account_id)
     date = Time.at(date_unix)
     facebook_account  = FacebookAccount.find(facebook_account_id)
@@ -128,21 +122,29 @@ class FacebookAccountStatsRetrieveJob
     # Format - Binom` Hash[<camp_id><price>]
     binom_costs_hash = {}
     binom_campaigns = facebook_account.binom_campaigns
+    insight_metrics = ['spend', 'cpm', 'cpc', 'ctr', 'unique_actions', 'cost_per_unique_action_type', 'inline_link_clicks']
+    report_formated_date = date.strftime('%d/%m/%Y')
+
     result =  ad_account.adsets(time_range: time_range).map do |adset|
-                insight_data = adset.insights(fields: PERFORMANCE_FIELDS + ['inline_link_clicks'], time_range: time_range).first
+                insight_data = adset.insights(fields: insight_metrics, time_range: time_range).first
                 # To not exceed requests quota
                 sleep 15
                 next if insight_data.nil?
-                row = [account_status, date.strftime('%d/%m/%Y'), account_name]
-                FIELDS_TO_PULL.each {|field| row.push(try_get_data(adset, field)) }
+                adset_status = try_get_data(adset, 'status')
+                adset_name = try_get_data(adset, 'name')
+
                 # To not exceed requests quota
                 sleep 15
-                row.push(get_promoted_object_event_type(adset))
-                row.push(get_budget(adset, currency))
+                adset_unique_actions = adstats_type_value(try_get_data(insight_data, 'unique_actions'), CONVERSION_TARGET_ACTION) || '-'
+                unique_count = adstats_type_value(try_get_data(insight_data, 'cost_per_unique_action_type'), CONVERSION_TARGET_ACTION)
+                adset_unique_action_cost = unique_count ? format_money(format_value(unique_count), currency) : '-'
+                adset_budget = get_budget(adset, currency)
+                adset_spend = get_and_format_money(insight_data, 'spend', currency)
+                adset_cpm = get_and_format_money(insight_data, 'cpm', currency)
+                adset_cpc = get_and_format_money(insight_data, 'cpc', currency)
+                adset_ctr = get_and_format_percentage(insight_data, 'ctr')
+                adset_inline_link_clicks = try_get_data(insight_data, 'inline_link_clicks')
 
-                insights =  PERFORMANCE_FIELDS_MONEY.map do |field|
-                              get_and_format_money(insight_data, field, currency)
-                            end + [get_and_format_percentage(insight_data, 'ctr')] + [(try_get_data(insight_data, 'inline_link_clicks'))]
                 sleep 10
                 campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
                 if campaign
@@ -150,7 +152,21 @@ class FacebookAccountStatsRetrieveJob
                   binom_costs_hash[campaign.binom_identificator]['costs'] += insight_data.spend.to_f
                 end
                 logger.warn("Cannot find campaign for id - #{adset.campaign.id}")
-                row.push(*insights)
+                [
+                  account_status,
+                  report_formated_date,
+                  account_name,
+                  adset_status,
+                  adset_name,
+                  adset_unique_actions,
+                  adset_budget,
+                  adset_spend,
+                  adset_unique_action_cost,
+                  adset_cpm,
+                  adset_cpc,
+                  adset_ctr,
+                  adset_inline_link_clicks
+                ]
               end.compact
     logger.info(result)
     SendToGoogleSpreadsheetFacebookAccountJob.perform_async(date_unix, facebook_account_id, result, COLUMN_HEADERS)
