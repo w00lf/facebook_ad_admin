@@ -101,7 +101,7 @@ class FacebookAccountStatsRetrieveJob
   end
 
   def adstats_type_value(adstats, action_type)
-    return unless adstats
+    return unless adstats || adstats == '-'
     adstats.find { |adstat| adstat.action_type == action_type }&.value
   end
 
