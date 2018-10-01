@@ -102,12 +102,13 @@ class FacebookAccountStatsRetrieveJob
 
   def adstats_type_value(adstats, action_type)
     return unless adstats.is_a?(Array)
-    adstats.find { |adstat| adstat.action_type == action_type }&.value
+    adstats.find { |adstat| try_get_data(adstat, 'action_type') == action_type }&.value
   end
 
   def perform(date_unix, facebook_account_id)
+    facebook_account = FacebookAccount.find(facebook_account_id)
+    parse_result = facebook_account.parse_results.create(status: 'in_progress')
     date = Time.at(date_unix)
-    facebook_account  = FacebookAccount.find(facebook_account_id)
     time_range = { 'since' => date.strftime('%Y-%m-%d'),  'until' => date.strftime('%Y-%m-%d') }
     log_file = File.new(Rails.root.join('log', 'parser.log'), 'a+')
     log_file.sync = true
@@ -122,7 +123,7 @@ class FacebookAccountStatsRetrieveJob
     # Format - Binom` Hash[<camp_id><price>]
     binom_costs_hash = {}
     binom_campaigns = facebook_account.binom_campaigns
-    insight_metrics = ['spend', 'cpm', 'cpc', 'ctr', 'unique_actions', 'cost_per_unique_action_type', 'inline_link_clicks']
+    insight_metrics = ['spend', 'cpm', 'cost_per_inline_link_click', 'inline_link_click_ctr', 'actions', 'cost_per_action_type', 'inline_link_clicks']
     report_formated_date = date.strftime('%d/%m/%Y')
 
     result =  ad_account.adsets(time_range: time_range).map do |adset|
@@ -135,14 +136,14 @@ class FacebookAccountStatsRetrieveJob
 
                 # To not exceed requests quota
                 sleep 15
-                adset_unique_actions = adstats_type_value(try_get_data(insight_data, 'unique_actions'), CONVERSION_TARGET_ACTION) || '-'
-                unique_count = adstats_type_value(try_get_data(insight_data, 'cost_per_unique_action_type'), CONVERSION_TARGET_ACTION)
+                adset_unique_actions = adstats_type_value(try_get_data(insight_data, 'actions'), CONVERSION_TARGET_ACTION) || '-'
+                unique_count = adstats_type_value(try_get_data(insight_data, 'cost_per_action_type'), CONVERSION_TARGET_ACTION)
                 adset_unique_action_cost = unique_count ? format_money(format_value(unique_count), currency) : '-'
                 adset_budget = get_budget(adset, currency)
                 adset_spend = get_and_format_money(insight_data, 'spend', currency)
                 adset_cpm = get_and_format_money(insight_data, 'cpm', currency)
-                adset_cpc = get_and_format_money(insight_data, 'cpc', currency)
-                adset_ctr = get_and_format_percentage(insight_data, 'ctr')
+                adset_cpc = get_and_format_money(insight_data, 'cost_per_inline_link_click', currency)
+                adset_ctr = get_and_format_percentage(insight_data, 'inline_link_click_ctr')
                 adset_inline_link_clicks = try_get_data(insight_data, 'inline_link_clicks')
 
                 sleep 10
@@ -174,6 +175,10 @@ class FacebookAccountStatsRetrieveJob
     binom_costs_hash.each_pair do |campaign_id, compaign_hash|
       SendToBinomApiFacebookCampaignJob.perform_async(date_unix, campaign_id, compaign_hash['costs'], compaign_hash['currency'])
     end
+    parse_result.update!(status: 'ok')
+  rescue => e
+    parse_result.update!(status: 'error', error_type: e.class, error_text: e.message)
+  ensure
     log_file.close
   end
 end

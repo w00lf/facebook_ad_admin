@@ -11,6 +11,13 @@ ActiveAdmin.register FacebookAccount do
     end
     column :api_secret
     column :facebook_group_account
+    column :parse_status do |obj|
+      last_parse_result = obj.parse_results.last
+      if last_parse_result
+        status_tag last_parse_result.status, class: last_parse_result.status, label: last_parse_result.status
+        link_to('more', admin_parse_result_path(last_parse_result)) if last_parse_result.status == 'error'
+      end
+    end
     actions
   end
 end
