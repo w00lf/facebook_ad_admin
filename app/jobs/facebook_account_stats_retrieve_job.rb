@@ -102,7 +102,9 @@ class FacebookAccountStatsRetrieveJob
 
   def adstats_type_value(adstats, action_type)
     return unless adstats.is_a?(Array)
-    adstats.find { |adstat| try_get_data(adstat, 'action_type') == action_type }&.value
+    adstat = adstats.find { |adstat| try_get_data(adstat, 'action_type') == action_type }
+    return unless adstat
+    try_get_data(adstat, 'value')
   end
 
   def perform(date_unix, facebook_account_id)
@@ -146,7 +148,6 @@ class FacebookAccountStatsRetrieveJob
                 adset_ctr = get_and_format_percentage(insight_data, 'inline_link_click_ctr')
                 adset_inline_link_clicks = try_get_data(insight_data, 'inline_link_clicks')
 
-                sleep 10
                 campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
                 if campaign
                   binom_costs_hash[campaign.binom_identificator] = { 'costs' => 0, 'currency' => currency } unless binom_costs_hash[campaign.binom_identificator]
