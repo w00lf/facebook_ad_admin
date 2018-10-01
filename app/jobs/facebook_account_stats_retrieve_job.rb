@@ -133,6 +133,8 @@ class FacebookAccountStatsRetrieveJob
                 # To not exceed requests quota
                 sleep 15
                 next if insight_data.nil?
+                adset_spend = get_and_format_money(insight_data, 'spend', currency)
+                next if adset_spend == '-'
                 adset_status = try_get_data(adset, 'status')
                 adset_name = try_get_data(adset, 'name')
 
@@ -142,16 +144,16 @@ class FacebookAccountStatsRetrieveJob
                 unique_count = adstats_type_value(try_get_data(insight_data, 'cost_per_action_type'), CONVERSION_TARGET_ACTION)
                 adset_unique_action_cost = unique_count ? format_money(format_value(unique_count), currency) : '-'
                 adset_budget = get_budget(adset, currency)
-                adset_spend = get_and_format_money(insight_data, 'spend', currency)
                 adset_cpm = get_and_format_money(insight_data, 'cpm', currency)
                 adset_cpc = get_and_format_money(insight_data, 'cost_per_inline_link_click', currency)
                 adset_ctr = get_and_format_percentage(insight_data, 'inline_link_click_ctr')
                 adset_inline_link_clicks = try_get_data(insight_data, 'inline_link_clicks')
 
                 campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
-                if campaign
+                spend = try_get_data(insight_data, 'spend')
+                if campaign && spend != '-'
                   binom_costs_hash[campaign.binom_identificator] = { 'costs' => 0, 'currency' => currency } unless binom_costs_hash[campaign.binom_identificator]
-                  binom_costs_hash[campaign.binom_identificator]['costs'] += insight_data.spend.to_f
+                  binom_costs_hash[campaign.binom_identificator]['costs'] += spend.to_f
                 end
                 logger.warn("Cannot find campaign for id - #{adset.campaign.id}")
                 [
