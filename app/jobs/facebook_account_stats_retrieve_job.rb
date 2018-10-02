@@ -23,7 +23,7 @@ class FacebookAccountStatsRetrieveJob
     'Result',
     'Daily Budget',
     'Amount Spent',
-    'CPL',
+    'CPA',
     'CPM',
     'CPC (Link)',
     'CTR (Link)',
