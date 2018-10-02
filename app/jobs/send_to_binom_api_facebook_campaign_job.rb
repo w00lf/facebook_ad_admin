@@ -12,6 +12,13 @@ class SendToBinomApiFacebookCampaignJob
     # date - 12 == custom date
     uri = URI("#{Settings.binom_api.url}/?page=save_update_costs&camp_id=#{campaign_id}&type=1&date=12&date_s=#{date_string}&date_e=#{date_string}&timezone=3&cost=#{usd_costs}&value=#{usd_costs}&api_key=#{Settings.binom_api.key}")
     result = JSON.load(Net::HTTP.get(uri))
-    raise(result.fetch('error')) if result.fetch('check_status') != "true"
+    log_file = File.new(Rails.root.join('log', 'binom.log'), 'a+')
+    log_file.sync = true
+    logger = Logger.new(log_file)
+    logger.info(uri)
+    logger.info(result)
+    if result.fetch('check_status', false) != "true"
+      raise("Error in response: #{result}")
+    end
   end
 end
