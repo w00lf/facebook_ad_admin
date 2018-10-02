@@ -30,8 +30,11 @@ class FacebookAccountStatsRetrieveJob
     'Clicks',
     'image/vid'
   ]
-  CONVERSION_TARGET_ACTION = 'offsite_conversion'.freeze
   MAX_RETRIES = 20
+  TARGET_CONVERSION_BY_TYPE = {
+    'ADD_TO_CART' => 'offsite_conversion.fb_pixel_add_to_cart',
+    'LEAD' => 'offsite_conversion'
+  }
 
   def format_money(price, currency)
     return '-' unless price
@@ -79,7 +82,7 @@ class FacebookAccountStatsRetrieveJob
   end
 
   def get_promoted_object_event_type(adset)
-    with_exception_control { adset.promoted_object&.custom_event_type&.to_s&.downcase&.capitalize }
+    with_exception_control { adset.promoted_object&.custom_event_type&.to_s }
   end
 
   def get_budget(adset, currency)
@@ -140,8 +143,9 @@ class FacebookAccountStatsRetrieveJob
 
                 # To not exceed requests quota
                 sleep 15
-                adset_unique_actions = adstats_type_value(try_get_data(insight_data, 'actions'), CONVERSION_TARGET_ACTION) || '-'
-                unique_count = adstats_type_value(try_get_data(insight_data, 'cost_per_action_type'), CONVERSION_TARGET_ACTION)
+                conversion_action = TARGET_CONVERSION_BY_TYPE.fetch(get_promoted_object_event_type(adset))
+                adset_unique_actions = adstats_type_value(try_get_data(insight_data, 'actions'), conversion_action) || '-'
+                unique_count = adstats_type_value(try_get_data(insight_data, 'cost_per_action_type'), conversion_action)
                 adset_unique_action_cost = unique_count ? format_money(format_value(unique_count), currency) : '-'
                 adset_budget = get_budget(adset, currency)
                 adset_cpm = get_and_format_money(insight_data, 'cpm', currency)
