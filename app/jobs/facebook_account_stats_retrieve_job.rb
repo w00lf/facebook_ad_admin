@@ -33,7 +33,7 @@ class FacebookAccountStatsRetrieveJob
   MAX_RETRIES = 20
   TARGET_CONVERSION_BY_TYPE = {
     'ADD_TO_CART' => 'offsite_conversion.fb_pixel_add_to_cart',
-    'LEAD' => 'offsite_conversion'
+    'LEAD' => 'offsite_conversion.fb_pixel_lead'
   }
 
   def format_money(price, currency)
