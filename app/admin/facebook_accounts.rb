@@ -1,6 +1,16 @@
 ActiveAdmin.register FacebookAccount do
   permit_params :active, :name, :api_identificator, :api_token, :api_secret, :facebook_group_account_id
 
+  member_action :rescan do
+    FacebookAccountStatsRetrieveJob.perform_async((1.days.ago).to_i, resource.id)
+    redirect_to resource_path, notice: 'Queued rescan of the account'
+  end
+
+  action_item :rescan, only: :show do
+    link_to 'Rescan for yesterday', rescan_admin_facebook_account_path(resource)
+  end
+
+
   index do
     id_column
     column :active
