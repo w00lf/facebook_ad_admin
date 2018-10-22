@@ -21,7 +21,7 @@ class SendToGoogleSpreadsheetFacebookAccountJob
       group_name, group_rows = group
       worksheet = spreadsheet.worksheet_by_title(group_name)
       worksheet = spreadsheet.add_worksheet(group_name, 1000, 100) unless worksheet
-      first_empty_row = (1..1000).find { |row_number| worksheet[row_number,1].blank? }
+      first_empty_row = (1..10000).find { |row_number| worksheet[row_number,1].blank? }
       result_rows = first_empty_row == 1 ? ([column_headers] + group_rows) : group_rows
       result_rows.each.with_index(first_empty_row) do |row, i|
         row.each.with_index(1) do |attr, j|
