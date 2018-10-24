@@ -34,7 +34,7 @@ gem 'sidekiq'
 gem 'config'
 
 # Integrations
-gem 'facebookbusiness', '0.3.1.1'
+gem 'facebookbusiness', '~> 0.3.0'
 gem 'google_drive', '2.1.11'
 
 gem 'money', '~>6.11.0'

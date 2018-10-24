@@ -143,10 +143,10 @@ GEM
       money (~> 6.11.0)
       nokogiri (~> 1.8.1)
     execjs (2.7.0)
-    facebookbusiness (0.3.1.1)
+    facebookbusiness (0.3.2.0)
       faraday
       json
-    faraday (0.15.2)
+    faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     formtastic (3.1.5)
@@ -362,7 +362,7 @@ DEPENDENCIES
   config
   devise
   eu_central_bank
-  facebookbusiness (= 0.3.1.1)
+  facebookbusiness (~> 0.3.0)
   google_drive (= 2.1.11)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
