@@ -128,7 +128,7 @@ class FacebookAccountStatsRetrieveJob
     # Format - Binom` Hash[<camp_id><price>]
     binom_costs_hash = {}
     binom_campaigns = facebook_account.binom_campaigns
-    insight_metrics = ['spend', 'cpm', 'cost_per_inline_link_click', 'inline_link_click_ctr', 'actions', 'cost_per_action_type', 'inline_link_clicks']
+    insight_metrics = ['spend', 'cpm', 'cost_per_inline_link_click', 'inline_link_click_ctr', 'actions', 'inline_link_clicks']
     report_formated_date = date.strftime('%d/%m/%Y')
 
     result =  ad_account.adsets(time_range: time_range).map do |adset|
@@ -145,7 +145,8 @@ class FacebookAccountStatsRetrieveJob
                 sleep 15
                 conversion_action = TARGET_CONVERSION_BY_TYPE.fetch(get_promoted_object_event_type(adset))
                 adset_unique_actions = adstats_type_value(try_get_data(insight_data, 'actions'), conversion_action) || '-'
-                unique_count = adstats_type_value(try_get_data(insight_data, 'cost_per_action_type'), conversion_action)
+                spend = try_get_data(insight_data, 'spend')
+                unique_count = adset_unique_actions != '-' && spend != '-' ? spend.to_f / adset_unique_actions.to_f : nil
                 adset_unique_action_cost = unique_count ? format_money(format_value(unique_count), currency) : '-'
                 adset_budget = get_budget(adset, currency)
                 adset_cpm = get_and_format_money(insight_data, 'cpm', currency)
@@ -154,7 +155,7 @@ class FacebookAccountStatsRetrieveJob
                 adset_inline_link_clicks = try_get_data(insight_data, 'inline_link_clicks')
 
                 campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
-                spend = try_get_data(insight_data, 'spend')
+
                 if campaign && spend != '-'
                   binom_costs_hash[campaign.binom_identificator] = { 'costs' => 0, 'currency' => currency } unless binom_costs_hash[campaign.binom_identificator]
                   binom_costs_hash[campaign.binom_identificator]['costs'] += spend.to_f
