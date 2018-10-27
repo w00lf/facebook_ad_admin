@@ -1,4 +1,6 @@
 class SendToGoogleSpreadsheetFacebookAccountJob
+  queue_as :google_spreadsheet
+
   include Sidekiq::Worker
 
   def perform(date_unix, facebook_account_id, rows, column_headers)

@@ -5,7 +5,7 @@ namespace :facebook_parser do
     logger.info("Started parsing of account, target date - #{parse_day}")
     index = 0
     FacebookAccount.joins(:facebook_group_account).where(active: true, facebook_group_accounts: { active: true }).find_each do |facebook_account|
-      FacebookAccountStatsRetrieveJob.perform_at((index * 120).seconds.from_now, parse_day.to_i, facebook_account.id)
+      FacebookAccountStatsRetrieveJob.perform_at((index * 20).seconds.from_now, parse_day.to_i, facebook_account.id)
       index += 1
       logger.info("Setted job for account id - #{facebook_account.api_identificator}")
     end
