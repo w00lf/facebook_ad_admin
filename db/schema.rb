@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928140617) do
+ActiveRecord::Schema.define(version: 20181101090845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(version: 20180928140617) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "import_results", force: :cascade do |t|
+    t.text "error_type"
+    t.text "error_text"
+    t.bigint "facebook_account_id"
+    t.text "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facebook_account_id"], name: "index_import_results_on_facebook_account_id"
+  end
+
   create_table "parse_results", force: :cascade do |t|
     t.text "error_type"
     t.text "error_text"
@@ -87,5 +97,6 @@ ActiveRecord::Schema.define(version: 20180928140617) do
 
   add_foreign_key "binom_campaigns", "facebook_accounts"
   add_foreign_key "facebook_accounts", "facebook_group_accounts"
+  add_foreign_key "import_results", "facebook_accounts", on_delete: :cascade
   add_foreign_key "parse_results", "facebook_accounts", on_delete: :cascade
 end

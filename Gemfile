@@ -51,6 +51,11 @@ group :development, :test do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'factory_bot'
 end
 
 group :development do

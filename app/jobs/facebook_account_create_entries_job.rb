@@ -34,7 +34,7 @@ class FacebookAccountCreateEntriesJob < ApplicationJob
   #   },
   #   bid_amount: 2,
   #   name: 'adset without omp test',
-  #   daily_budget: '100',
+  #   daily_budget: '100000', #  In cents
   #   campaign_id: '120330000052891710',
   #   status: 'PAUSED',
   #     'targeting' => {
@@ -43,7 +43,30 @@ class FacebookAccountCreateEntriesJob < ApplicationJob
   #       },
   #       "age_min" => '18',
   #       'age_max' => '65',
-  #       'locales' => ['23']
+  #       'locales' => ['23'],
+  #
+  #       # Placemnts:
+  #       # Facebook:
+  #       'publisher_platforms' => ["facebook"], # facebook, instagram, messenger, audience_network
+  #       'facebook_positions' => ["feed", "marketplace"], # feed, right_hand_column, instant_article, marketplace, and story.
+  #
+  #       Instagram:
+  #       'publisher_platforms' => ["instagram"]
+  #       'instagram_positions' => ['stream', 'story']
+  #
+  #       Audience:
+  #       publisher_platforms' => ["audience_network"]
+  #       'audience_network_positions' => ['classic', 'instream_video', 'rewarded_video']
+  #
+  #       Messenger:
+  #       'messenger_positions' => ['messenger_home', 'sponsored_messages', 'story']
+  #       'device_platforms' => ["mobile", "desktop"]
+  #
   #     }
   # })
+  # LEAD or AD_TO_CART types:
+  # bid_amount: nil
+  # billing_event: 'IMPRESSIONS'
+  # optimization_goal: "OFFSITE_CONVERSIONS"
+  # bid_strategy: 'LOWEST_COST_WITHOUT_CAP'
 end

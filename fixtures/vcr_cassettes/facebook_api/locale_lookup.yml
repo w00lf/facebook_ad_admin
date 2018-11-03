@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/v3.2/search?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=0074f3c22877a79472449cf3207c9c45b41a74853f406d453edc54d3d497098b&q=Spanish&type=adlocale
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v3.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"0a25124b0cfbe506e0c09a3820f3645ab54617a8"'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.2
+      X-Fb-Trace-Id:
+      - B93cEdP/7vC
+      X-Fb-Rev:
+      - '4497740'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - Y/8d+7L4RJPNWTEpMLkOXmkllKw6qY+vXayaj5fKyriHniZcFjFqRqFwtc39cj2FHjA5NvdS2lBa+nCW/lLxTQ==
+      Date:
+      - Sat, 03 Nov 2018 09:03:36 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '132'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"name":"Spanish","key":23},{"name":"Spanish (Spain)","key":7},{"name":"Spanish
+        (All)","key":1002}],"paging":{"cursors":{"before":"MAZDZD","after":"MgZDZD"}}}'
+    http_version: 
+  recorded_at: Sat, 03 Nov 2018 09:03:36 GMT
+recorded_with: VCR 4.0.0
