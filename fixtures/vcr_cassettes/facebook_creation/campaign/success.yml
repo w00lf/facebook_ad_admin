@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/v3.2/act_<FACEBOOK_ACCOUNT_ID>/campaigns?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=0074f3c22877a79472449cf3207c9c45b41a74853f406d453edc54d3d497098b
+    body:
+      encoding: UTF-8
+      string: name=Test+campaign&objective=CONVERSIONS
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v3.2
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.2
+      X-Fb-Trace-Id:
+      - F+e22luvbC7
+      X-Fb-Rev:
+      - '4497740'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      Set-Cookie:
+      - sW=1541240598%3AAaBZ6ZPZ93c-GaaV; path=/; domain=.graph.facebook.com; secure
+      X-Fb-Debug:
+      - lmKlwdlmKaqvulllMvHg5zjaYGjSZqa7iQzn1EOnuErT87zpob3p8CsWG6DtblYtqCG45CIxEBYRJPVWE04SBg==
+      Date:
+      - Sat, 03 Nov 2018 10:23:20 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '27'
+    body:
+      encoding: UTF-8
+      string: '{"id":"120330000053077610"}'
+    http_version: 
+  recorded_at: Sat, 03 Nov 2018 10:23:20 GMT
+recorded_with: VCR 4.0.0

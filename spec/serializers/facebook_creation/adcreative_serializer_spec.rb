@@ -16,16 +16,27 @@ RSpec.describe FacebookCreation::AdcreativeSerializer do
       "Text"=>"Test text",
       "Headline"=>"Text headline",
       "News Feed Link Description(optional)"=>"-",
+      "Page Id" => '12345',
+      'News Feed Link Description' => 'This is news feed',
       "URL Parameters"=>"Ad=1&d=20.10&utm_source=HDSDSW&utm_medium=4325365476"
     }
   }
   let(:result) {
     {
-      :image_url=>"https://onaliternote.files.wordpress.com/2016/11/wp-1480230666843.jpg?crop",
-      :link_url=>"http://ya.ru",
-      :body=>"Test text",
-      :title=>"Text headline",
-      :url_tags=>"Ad=1&d=20.10&utm_source=HDSDSW&utm_medium=4325365476"
+      object_story_spec: {
+        page_id: '12345',
+        link_data: {
+          message: "Test text",
+          link: "http://ya.ru",
+          attachment_style: "link",
+          caption: "",
+          name: "Text headline",
+          description: 'This is news feed',
+          image_url: "https://onaliternote.files.wordpress.com/2016/11/wp-1480230666843.jpg?crop",
+        }
+      },
+      object_type: "SHARE",
+      url_tags: "Ad=1&d=20.10&utm_source=HDSDSW&utm_medium=4325365476"
     }
   }
 

@@ -23,7 +23,7 @@ module FacebookCreation
     end
 
     def as_json
-      age_min, age_max = @adset_attributes.fetch('Age').strip.split('-').map(&:strip)
+      age_min, age_max = @adset_attributes.fetch('Age').strip.split('-').map(&:strip).map(&:to_i)
       platfrom = @adset_attributes.fetch('Platform')
       {
         name: @adset_attributes.fetch('Ad Set Name'),
@@ -34,15 +34,19 @@ module FacebookCreation
           pixel_id: @adset_attributes.fetch('Pixel Id'),
           custom_event_type: @adset_attributes.fetch('Conversion/Website').upcase
         },
-        daily_budget: (@adset_attributes.fetch('Budget').gsub(/[^\d.]+/, '').to_f * 100).to_i,
+        daily_budget: (@adset_attributes.fetch('Budget').gsub(/[^\d\.]+/, '').to_f * 100).to_i,
         targeting: {
           geo_locations: {
-            countries: country_lookup(@adset_attributes.fetch('Locations'))
+            countries: country_lookup(@adset_attributes.fetch('Locations')),
+            location_types: [
+              "home",
+              "recent"
+            ]
           },
           age_min: age_min,
           age_max: age_max,
           locales: locale_lookup(@adset_attributes.fetch('Languages')),
-          publisher_platforms: platfrom,
+          publisher_platforms: [platfrom],
           POSITION_OPTIONS.fetch(platfrom) => @adset_attributes.fetch('Placement').split(',').map(&:strip)
         }.merge(genders_targeting(@adset_attributes.fetch('Gender')))
       }
@@ -58,7 +62,7 @@ module FacebookCreation
     end
 
     def country_lookup(location)
-      [FacebookApi::LocationLookupService.call(@facebook_account, location).first.fetch('country_name')]
+      [FacebookApi::LocationLookupService.call(@facebook_account, location).first.fetch('country_code')]
     end
 
     def locale_lookup(locale)

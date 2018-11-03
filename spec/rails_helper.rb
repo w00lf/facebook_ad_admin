@@ -30,10 +30,15 @@ VCR.configure do |config|
   config.ignore_hosts '127.0.0.1', 'localhost'
   config.hook_into :webmock
   config.filter_sensitive_data('<FACEBOOK_API_TOKEN>') { facebook_api_token }
+  config.filter_sensitive_data('<FACEBOOK_ACCOUNT_ID>') { facebook_app_id }
 end
 
 def facebook_api_token
   ENV['FACEBOOK_API_TOKEN']
+end
+
+def facebook_app_id
+  ENV['FACEBOOK_ACCOUNT_ID']
 end
 
 # Checks for pending migrations and applies them before tests are run.

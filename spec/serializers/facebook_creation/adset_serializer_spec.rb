@@ -38,12 +38,16 @@ RSpec.describe FacebookCreation::AdsetSerializer do
       :daily_budget=>500000,
       :targeting=> {
         :geo_locations=> {
-          :countries=>["Mexico"]
+          :countries=>["MX"],
+          location_types: [
+            "home",
+            "recent"
+          ]
         },
-        :age_min=>"18",
-        :age_max=>"65+",
+        :age_min=>18,
+        :age_max=>65,
         :locales=>[23],
-        :publisher_platforms =>"facebook",
+        :publisher_platforms =>["facebook"],
         :facebook_positions =>["feeds"]
       }
     }

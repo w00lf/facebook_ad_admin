@@ -8,10 +8,19 @@ module FacebookCreation
 
     def as_json
       {
-        image_url: @adcreative_attributes.fetch("Image"),
-        link_url: @adcreative_attributes.fetch("Website URL"),
-        body: @adcreative_attributes.fetch("Text"),
-        title: @adcreative_attributes.fetch("Headline"),
+        object_story_spec: {
+          page_id: @adcreative_attributes.fetch("Page Id"),
+          link_data: {
+            message: @adcreative_attributes.fetch("Text"),
+            link: @adcreative_attributes.fetch("Website URL"),
+            attachment_style: "link",
+            caption: "",
+            name: @adcreative_attributes.fetch("Headline"),
+            description: @adcreative_attributes.fetch("News Feed Link Description"),
+            image_url: @adcreative_attributes.fetch("Image")
+          }
+        },
+        object_type: "SHARE",
         url_tags: @adcreative_attributes.fetch("URL Parameters")
       }
     rescue => e

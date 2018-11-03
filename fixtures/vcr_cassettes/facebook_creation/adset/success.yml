@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/v3.2/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=0074f3c22877a79472449cf3207c9c45b41a74853f406d453edc54d3d497098b
+    body:
+      encoding: UTF-8
+      string: bid_strategy=LOWEST_COST_WITHOUT_CAP&billing_event=IMPRESSIONS&campaign_id=120330000053077610&daily_budget=500000&name=MX+-+%2818%2B%29+-+1&optimization_goal=OFFSITE_CONVERSIONS&promoted_object=%7B%22pixel_id%22%3A%221573475279464976%22%2C%22custom_event_type%22%3A%22LEAD%22%7D&targeting=%7B%22geo_locations%22%3A%7B%22countries%22%3A%5B%22MX%22%5D%7D%2C%22age_min%22%3A%2218%22%2C%22age_max%22%3A%2265%22%2C%22locales%22%3A%5B23%5D%2C%22publisher_platforms%22%3A%5B%22facebook%22%5D%2C%22facebook_positions%22%3A%5B%22feed%22%5D%7D
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v3.2
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.2
+      X-Fb-Trace-Id:
+      - BNP8AWp7bH7
+      X-Fb-Rev:
+      - '4497783'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      Set-Cookie:
+      - sW=1541241446%3AAaAGcHJ2cwQu1phW; path=/; domain=.graph.facebook.com; secure
+      X-Fb-Debug:
+      - 7oOMFvKVoUdwZUZFaDUn43pZ8h9LZf802xfXLoJPzsqho/YPsoCz3JOTfdrJy+Z4caruQWG2dDeeWOEYYrnQYA==
+      Date:
+      - Sat, 03 Nov 2018 10:37:30 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '27'
+    body:
+      encoding: UTF-8
+      string: '{"id":"120330000053077910"}'
+    http_version: 
+  recorded_at: Sat, 03 Nov 2018 10:37:30 GMT
+recorded_with: VCR 4.0.0
