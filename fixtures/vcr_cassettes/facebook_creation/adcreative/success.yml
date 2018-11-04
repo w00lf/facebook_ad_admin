@@ -5,7 +5,7 @@ http_interactions:
     uri: https://graph.facebook.com/v3.2/act_<FACEBOOK_ACCOUNT_ID>/adcreatives?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=0074f3c22877a79472449cf3207c9c45b41a74853f406d453edc54d3d497098b
     body:
       encoding: UTF-8
-      string: object_story_spec=%7B%22page_id%22%3A%22250515082286181%22%2C%22link_data%22%3A%7B%22message%22%3A%22Test+text%22%2C%22link%22%3A%22http%3A%2F%2Fya.ru%22%2C%22attachment_style%22%3A%22link%22%2C%22caption%22%3A%22%22%2C%22name%22%3A%22Text+headline%22%2C%22description%22%3A%22This+is+news+feed%22%2C%22image_hash%22%3A%222274bec96d4cb5bf32caa943be78e475%22%7D%7D&object_type=SHARE&url_tags=Ad%3D1%26d%3D20.10%26utm_source%3DHDSDSW%26utm_medium%3D4325365476
+      string: object_story_spec=%7B%22page_id%22%3A%22250515082286181%22%2C%22link_data%22%3A%7B%22message%22%3A%22Test+text%22%2C%22link%22%3A%22http%3A%2F%2Fya.ru%22%2C%22attachment_style%22%3A%22link%22%2C%22caption%22%3A%22%22%2C%22name%22%3A%22Text+headline%22%2C%22description%22%3A%22This+is+news+feed%22%2C%22image_hash%22%3A%2261b44ff5533fdea8c9663ff3efbc7b20%22%7D%7D&object_type=SHARE&url_tags=Ad%3D1%26d%3D20.10%26utm_source%3DHDSDSW%26utm_medium%3D4325365476
     headers:
       User-Agent:
       - fbbizsdk-ruby-v3.2
@@ -17,48 +17,42 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers:
-      X-App-Usage:
-      - '{"call_count":5,"total_cputime":0,"total_time":1}'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
       - v3.2
       X-Fb-Trace-Id:
-      - Ev8Y7vFCRmp
+      - AnJBjxINpyh
       X-Fb-Rev:
-      - '4497921'
+      - '4498249'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
       Cache-Control:
-      - no-store
+      - private, no-cache, no-store, must-revalidate
       Pragma:
       - no-cache
       Strict-Transport-Security:
       - max-age=15552000; preload
       Access-Control-Allow-Origin:
       - "*"
-      Expires:
-      - Sat, 01 Jan 2000 00:00:00 GMT
-      Www-Authenticate:
-      - OAuth "Facebook Platform" "invalid_request" "Invalid parameter"
       Set-Cookie:
-      - sW=1541286272%3AAaBkJiZpmM_FsBOQ; path=/; domain=.graph.facebook.com; secure
-      Vary:
-      - Accept-Encoding
+      - sW=1541343368%3AAaBT6j7GfdzQnrW4; path=/; domain=.graph.facebook.com; secure
       X-Fb-Debug:
-      - 4lO/8t4AODoJPVpE5j1tHG+Iyx8Orn/KLMJDvd+vywsD38ikxXE4prKsY8EkiW8bKPRgsBLkgyo7tFqTJ6+kgA==
+      - pB6GxYVbdl3HloCEpkmvqV0JBuguXhNuefkNWfgyHhjHLiAcQhJkJlcSEdn2Iroai67quDE8p7VAzUgeTFP3+g==
       Date:
-      - Sat, 03 Nov 2018 23:04:33 GMT
+      - Sun, 04 Nov 2018 14:56:13 GMT
       Connection:
       - keep-alive
       Content-Length:
-      - '234'
+      - '27'
     body:
-      encoding: ASCII-8BIT
-      string: '{"error":{"message":"Invalid parameter","type":"OAuthException","code":100,"error_subcode":1487174,"is_transient":false,"error_user_title":"Invalid
-        Image Hash","error_user_msg":"Image with Hash 2274bec96d4cb5bf32caa943be78e475
-        does not exist or does not belong to this account.","fbtrace_id":"Ev8Y7vFCRmp"}}'
+      encoding: UTF-8
+      string: '{"id":"120330000053085310"}'
     http_version: 
-  recorded_at: Sat, 03 Nov 2018 23:04:33 GMT
+  recorded_at: Sun, 04 Nov 2018 14:56:13 GMT
 recorded_with: VCR 4.0.0

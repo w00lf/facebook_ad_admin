@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe FacebookCreation::AdcreativeSerializer do
   MAIN_ATTRIBUTES = [
-    "Image",
+    "Image hash",
     "Website URL",
     "Text",
     "Headline",
@@ -11,7 +11,7 @@ RSpec.describe FacebookCreation::AdcreativeSerializer do
 
   let(:attributes) {
     {
-      "Image"=>"https://onaliternote.files.wordpress.com/2016/11/wp-1480230666843.jpg?crop",
+      "Image hash"=>"42fdgt45gfg4",
       "Website URL"=>"http://ya.ru",
       "Text"=>"Test text",
       "Headline"=>"Text headline",
@@ -32,7 +32,7 @@ RSpec.describe FacebookCreation::AdcreativeSerializer do
           caption: "",
           name: "Text headline",
           description: 'This is news feed',
-          image_url: "https://onaliternote.files.wordpress.com/2016/11/wp-1480230666843.jpg?crop",
+          image_hash: "42fdgt45gfg4",
         }
       },
       object_type: "SHARE",

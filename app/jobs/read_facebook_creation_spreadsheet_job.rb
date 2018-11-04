@@ -7,7 +7,7 @@ class ReadFacebookCreationSpreadsheetJob
     logger = Logger.new(File.new(Rails.root.join('tmp', 'read_facebook_creation_spreadsheet.log'), 'a+'))
     spreadsheet = session.spreadsheet_by_title(file_name)
     worksheet = spreadsheet.worksheets[0]
-    headers = worksheet.rows[0]
+    headers = worksheet.rows[0].map(&:strip)
     worksheet.rows.each.with_index(1) do |row, i|
       attributes = headers.zip(row).to_h
       logger.info("Got attributes: #{attributes}")
@@ -21,10 +21,10 @@ class ReadFacebookCreationSpreadsheetJob
         worksheet[i, column_index(headers, 'Status')] = "Cannot found account with id: #{account_id}"
         next
       end
-      import_result.update(facebook_account: facebook_account)
+      # import_result.update(facebook_account: facebook_account)
       serialize_attribute_and_create_entries(facebook_account, attributes)
+      worksheet[i, column_index(headers, 'Status')] = "done"
     end
-    worksheet[i, column_index(headers, 'Status')] = "done"
     worksheet.save
   end
 
@@ -32,8 +32,9 @@ class ReadFacebookCreationSpreadsheetJob
 
   def serialize_attribute_and_create_entries(facebook_account, attributes)
     campaign = create_campign(facebook_account, attributes)
-    adset = create_adset(facebook_account, attributes.merge(campaign_id: campaign.id))
-    adcreative = create_adcreative(facebook_account, attributes)
+    adset = create_adset(facebook_account, attributes,  campaign)
+    image_hash = create_image(facebook_account, attributes.fetch('Image')).first.hash
+    adcreative = create_adcreative(facebook_account, attributes.merge('Image hash' => image_hash))
     create_ad(facebook_account, attributes, adset, adcreative)
   end
 
@@ -42,15 +43,19 @@ class ReadFacebookCreationSpreadsheetJob
     FacebookCreation::CampaignService.call(facebook_account, parsed_attributes)
   end
 
-  def create_adset(facebook_account, attributes)
+  def create_adset(facebook_account, attributes, campaign)
     parsed_attributes = FacebookCreation::AdsetSerializer.new(facebook_account: facebook_account,
                                                               adset_attributes: attributes).as_json
-    FacebookCreation::AdsetService.call(facebook_account, parsed_attributes)
+    FacebookCreation::AdsetService.call(facebook_account, parsed_attributes.merge(campaign_id: campaign.id))
   end
 
   def create_adcreative(facebook_account, attributes)
     parsed_attributes = FacebookCreation::AdcreativeSerializer.new(attributes).as_json
     FacebookCreation::AdsetService.call(facebook_account, parsed_attributes)
+  end
+
+  def create_image(facebook_account, url)
+    FacebookCreation::ImageService.call(facebook_account, url)
   end
 
   def create_ad(facebook_account, attributes, adset, adcreative)

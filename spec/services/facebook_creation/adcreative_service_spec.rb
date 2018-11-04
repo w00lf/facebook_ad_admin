@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe FacebookCreation::AdcreativeService do
-  CREATED_CAMPAIGN_ID = '120330000053077610'
-  CREATED_ADSET_ID = '120330000053077910'
+  CREATED_ADCREATIVE = '120330000053085310'.freeze
+
   let(:attributes) {
     {
       object_story_spec: {
@@ -14,8 +14,7 @@ RSpec.describe FacebookCreation::AdcreativeService do
           caption: "",
           name: "Text headline",
           description: 'This is news feed',
-          # TODO: change hash
-          image_hash: "2274bec96d4cb5bf32caa943be78e475",
+          image_hash: "61b44ff5533fdea8c9663ff3efbc7b20",
         }
       },
       object_type: "SHARE",
@@ -29,9 +28,9 @@ RSpec.describe FacebookCreation::AdcreativeService do
       api_secret: ENV['FACEBOOK_APP_SECRET'])
   end
 
-  it 'Returns new campaign id' do
+  it 'Returns new adcreative id' do
     VCR.use_cassette('facebook_creation/adcreative/success') do
-      expect(described_class.call(facebook_account, attributes).id).to eq(CREATED_ADSET_ID)
+      expect(described_class.call(facebook_account, attributes).id).to eq(CREATED_ADCREATIVE)
     end
   end
 end

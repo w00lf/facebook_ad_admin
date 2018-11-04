@@ -17,7 +17,7 @@ module FacebookCreation
             caption: "",
             name: @adcreative_attributes.fetch("Headline"),
             description: @adcreative_attributes.fetch("News Feed Link Description"),
-            image_url: @adcreative_attributes.fetch("Image")
+            image_hash: @adcreative_attributes.fetch("Image hash")
           }
         },
         object_type: "SHARE",

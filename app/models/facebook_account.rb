@@ -4,7 +4,7 @@ class FacebookAccount < ApplicationRecord
 
   has_many :binom_campaigns
   has_many :parse_results
-  belongs_to :facebook_group_account
+  belongs_to :facebook_group_account, optional: true
 
   private
 

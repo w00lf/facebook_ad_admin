@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/v3.2/act_<FACEBOOK_ACCOUNT_ID>/ads?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=0074f3c22877a79472449cf3207c9c45b41a74853f406d453edc54d3d497098b
+    body:
+      encoding: UTF-8
+      string: adset_id=120330000053077910&creative=%7B%22creative_id%22%3A%22120330000053085310%22%7D&name=Ad+Name&status=PAUSED
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v3.2
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.2
+      X-Fb-Trace-Id:
+      - FCaipZr7FIQ
+      X-Fb-Rev:
+      - '4498266'
+      Cache-Control:
+      - no-store
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Www-Authenticate:
+      - OAuth "Facebook Platform" "unknown_error" "An unexpected error has occurred.
+        Please retry your request later."
+      Set-Cookie:
+      - sW=1541346722%3AAaAbHEefJWVBviQ3; path=/; domain=.graph.facebook.com; secure
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - 03TVgjcr3fouNMaefdFkGQi+lkOHVO7lO94VL0lBuGIy0pcHBktMqx63juhlYo5kblUgxpEj33207uHXb9RwPw==
+      Date:
+      - Sun, 04 Nov 2018 15:52:06 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '157'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"error":{"message":"An unexpected error has occurred. Please retry
+        your request later.","type":"OAuthException","is_transient":true,"code":2,"fbtrace_id":"FCaipZr7FIQ"}}'
+    http_version: 
+  recorded_at: Sun, 04 Nov 2018 15:52:06 GMT
+recorded_with: VCR 4.0.0
