@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe FacebookCreation::AdService do
-  CREATED_ADCREATIVE = '120330000053085310'.freeze
-  CREATED_ADSET_ID = '120330000053077910'.freeze
-  CREATED_AD_ID = '123'.freeze
+  CREATED_ADCREATIVE = '23843093148650049'.freeze
+  CREATED_ADSET_ID = '23843093138150049'.freeze
+  CREATED_AD_ID = '23843093149950049'.freeze
 
   let(:attributes) {
     {
@@ -15,7 +15,7 @@ RSpec.describe FacebookCreation::AdService do
   }
   let(:facebook_account) do
     double('Facebook Account',
-      account_id: ENV['FACEBOOK_ACCOUNT_ID'],
+      api_identificator: ENV['FACEBOOK_ACCOUNT_ID'],
       api_token: ENV['FACEBOOK_API_TOKEN'],
       api_secret: ENV['FACEBOOK_APP_SECRET'])
   end

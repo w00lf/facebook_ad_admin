@@ -12,6 +12,30 @@ module FacebookCreation
       'messenger' => :messenger_positions
     }.freeze
 
+    ALLOWED_POSITIONS = {
+      'facebook' => %w[
+        feed
+        right_hand_column
+        instant_article
+        marketplace
+        story
+      ].freeze,
+      'instagram' => %w[
+        stream
+        story
+      ].freeze,
+      'audience_network' => %w[
+        classic
+        instream_video
+        rewarded_video
+      ].freeze,
+      'messenger' => %w[
+        messenger_home
+        sponsored_messages
+        story
+      ].freeze
+    }
+
     GENDERS = {
       'male' => 1,
       'female' => 2
@@ -27,6 +51,7 @@ module FacebookCreation
       platfrom = @adset_attributes.fetch('Platform')
       {
         name: @adset_attributes.fetch('Ad Set Name'),
+        status: 'PAUSED',
         billing_event: BILLING_EVENT,
         optimization_goal: OPTIMIZATION_GOAL,
         bid_strategy: BID_STRATEGY,
@@ -34,7 +59,7 @@ module FacebookCreation
           pixel_id: @adset_attributes.fetch('Pixel Id'),
           custom_event_type: @adset_attributes.fetch('Conversion/Website').upcase
         },
-        daily_budget: (@adset_attributes.fetch('Budget').gsub(/[^\d\.]+/, '').to_f * 100).to_i,
+        daily_budget: (@adset_attributes.fetch('Budget').gsub(/[^\d\,\.]+/, '').to_f * 100).to_i,
         targeting: {
           geo_locations: {
             countries: country_lookup(@adset_attributes.fetch('Locations')),
@@ -47,7 +72,7 @@ module FacebookCreation
           age_max: age_max,
           locales: locale_lookup(@adset_attributes.fetch('Languages')),
           publisher_platforms: [platfrom],
-          POSITION_OPTIONS.fetch(platfrom) => @adset_attributes.fetch('Placement').split(',').map(&:strip)
+          POSITION_OPTIONS.fetch(platfrom) => retrive_position(platfrom, @adset_attributes.fetch('Placement'))
         }.merge(genders_targeting(@adset_attributes.fetch('Gender')))
       }
     rescue => e
@@ -55,6 +80,16 @@ module FacebookCreation
     end
 
     private
+
+    def retrive_position(platfrom, placement)
+      result = placement.split(',').map(&:strip)
+      allowed = ALLOWED_POSITIONS.fetch(platfrom)
+      result.each do |position|
+        unless allowed.include?(position)
+          raise AdsetSerializerError.new("Wrong Placement attribute, allowed values: #{allowed.join(', ')}")
+        end
+      end
+    end
 
     def genders_targeting(genders)
       return {} if genders == 'all'

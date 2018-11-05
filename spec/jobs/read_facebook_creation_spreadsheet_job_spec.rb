@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ReadFacebookCreationSpreadsheetJob do
   let(:facebook_account) do
-    double('Facebook Account',
+    FacebookAccount.new(name: 'Facebook Account',
       api_identificator: ENV['FACEBOOK_ACCOUNT_ID'],
       api_token: ENV['FACEBOOK_API_TOKEN'],
-      api_secret: ENV['FACEBOOK_APP_SECRET'])
+      api_secret: ENV['FACEBOOK_APP_SECRET']).tap {|n| n.save!(validate: false) }
   end
 
   subject do
@@ -16,20 +16,8 @@ RSpec.describe ReadFacebookCreationSpreadsheetJob do
 
   it 'Returns new adcreative id' do
     expect(FacebookAccount).to receive(:find_by).and_return(facebook_account)
-    VCR.use_cassette('google_spreadshet/facebook_creation/read/success') do
-      VCR.use_cassette('facebook_creation/campaign/success') do
-        VCR.use_cassette('facebook_api/location_lookup') do
-          VCR.use_cassette('facebook_api/locale_lookup') do
-            VCR.use_cassette('facebook_creation/adset/success') do
-              VCR.use_cassette('facebook_creation/image/success') do
-                VCR.use_cassette('facebook_creation/ad/success') do
-                  expect(subject).to eq('CREATED_AD_ID')
-                end
-              end
-            end
-          end
-        end
-      end
+    VCR.use_cassette('facebook_creation/all_spreadsheet/success') do
+      expect(subject).to eq(true)
     end
   end
 end

@@ -21,13 +21,14 @@ RSpec.describe FacebookCreation::AdsetSerializer do
       "Age"=>"18-65+",
       "Gender"=>"all",
       "Languages"=>"Spanish",
-      "Placement"=>"feeds",
+      "Placement"=>"feed",
       "Platform" => 'facebook'
     }
   }
   let(:result) {
     {
       :name=>"MX - (18+) - 1",
+      :status=>"PAUSED",
       :billing_event=>"IMPRESSIONS",
       :optimization_goal=>"OFFSITE_CONVERSIONS",
       :bid_strategy=>"LOWEST_COST_WITHOUT_CAP",
@@ -35,7 +36,7 @@ RSpec.describe FacebookCreation::AdsetSerializer do
         :pixel_id=>"123456",
         :custom_event_type=>"LEAD"
       },
-      :daily_budget=>500000,
+      :daily_budget=>5000,
       :targeting=> {
         :geo_locations=> {
           :countries=>["MX"],
@@ -48,7 +49,7 @@ RSpec.describe FacebookCreation::AdsetSerializer do
         :age_max=>65,
         :locales=>[23],
         :publisher_platforms =>["facebook"],
-        :facebook_positions =>["feeds"]
+        :facebook_positions =>["feed"]
       }
     }
   }
@@ -57,32 +58,34 @@ RSpec.describe FacebookCreation::AdsetSerializer do
   subject { described_class.new(facebook_account: facebook_account, adset_attributes: attributes).as_json }
 
   it 'Returns formated result' do
-    VCR.use_cassette('facebook_api/location_lookup') do
-      VCR.use_cassette('facebook_api/locale_lookup') do
-        is_expected.to eq(result)
-      end
+    VCR.use_cassette('facebook_api/lookups') do
+      is_expected.to eq(result)
     end
   end
 
   MAIN_ATTRIBUTES.reject { |n| ['Languages', 'Locations'].include?(n) }.each do |attribute|
     it "Raises AdsetSerializerError on missing attribute #{attribute}" do
-      VCR.use_cassette('facebook_api/location_lookup') do
-        VCR.use_cassette('facebook_api/locale_lookup') do
-          expect {
-            described_class.new(facebook_account: facebook_account, adset_attributes: attributes.reject {|n| n == attribute }).as_json
-          }.to raise_error(FacebookCreation::AdsetSerializer::AdsetSerializerError)
-        end
+      VCR.use_cassette('facebook_api/lookups') do
+        expect {
+          described_class.new(facebook_account: facebook_account, adset_attributes: attributes.reject {|n| n == attribute }).as_json
+        }.to raise_error(FacebookCreation::AdsetSerializer::AdsetSerializerError)
       end
     end
   end
 
   it 'Raise AdsetSerializerError if wrong gender provided' do
-    VCR.use_cassette('facebook_api/location_lookup') do
-        VCR.use_cassette('facebook_api/locale_lookup') do
-          expect {
-            described_class.new(facebook_account: facebook_account, adset_attributes: attributes.merge('Gender' => 'foo')).as_json
-          }.to raise_error(FacebookCreation::AdsetSerializer::AdsetSerializerError)
-        end
-      end
+    VCR.use_cassette('facebook_api/lookups') do
+      expect {
+        described_class.new(facebook_account: facebook_account, adset_attributes: attributes.merge('Gender' => 'foo')).as_json
+      }.to raise_error(FacebookCreation::AdsetSerializer::AdsetSerializerError)
+    end
+  end
+
+  it 'Raise AdsetSerializerError if wrong position provided' do
+    VCR.use_cassette('facebook_api/lookups') do
+      expect {
+        described_class.new(facebook_account: facebook_account, adset_attributes: attributes.merge('Placement' => 'feeds')).as_json
+      }.to raise_error(FacebookCreation::AdsetSerializer::AdsetSerializerError)
+    end
   end
 end

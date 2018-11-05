@@ -1,0 +1,114 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/v3.2/search?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2&location_types%5B%5D=country&q=Mexico&type=adgeolocation
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v3.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"a13883092316488215572eb000c2760285fdf66c"'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.2
+      X-Fb-Trace-Id:
+      - BtB6xHgAw2b
+      X-Fb-Rev:
+      - '4498880'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - Nb0rpeZLKBtp/xA8qSywFV3doAEkxzrwvejoBzp4CACY9aLfBuqRN75UeGGat4HvML7ShJvpaqA/xRQjCATUSA==
+      Date:
+      - Mon, 05 Nov 2018 15:35:55 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '412'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"key":"MX","name":"Mexico","type":"country","country_code":"MX","country_name":"Mexico","supports_region":true,"supports_city":true}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"},"next":"https:\/\/graph.facebook.com\/v3.2\/search?access_token=<FACEBOOK_API_TOKEN>&type=adgeolocation&location_types\u00255B0\u00255D=country&q=Mexico&limit=25&after=MAZDZD"}}'
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 15:35:55 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/v3.2/search?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2&q=Spanish&type=adlocale
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v3.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"0a25124b0cfbe506e0c09a3820f3645ab54617a8"'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.2
+      X-Fb-Trace-Id:
+      - CxwJVTkw7EO
+      X-Fb-Rev:
+      - '4498963'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - tXv4IMPvWNQyCAXujuy/1dHE5SUhMpcZPDmQyctGgF4j3lenudONujaeePBY8xXbXD1ZDEz1fP4UfowMCMvr5A==
+      Date:
+      - Mon, 05 Nov 2018 15:35:55 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '132'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"name":"Spanish","key":23},{"name":"Spanish (Spain)","key":7},{"name":"Spanish
+        (All)","key":1002}],"paging":{"cursors":{"before":"MAZDZD","after":"MgZDZD"}}}'
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 15:35:55 GMT
+recorded_with: VCR 4.0.0

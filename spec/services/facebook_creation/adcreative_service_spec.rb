@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FacebookCreation::AdcreativeService do
-  CREATED_ADCREATIVE = '120330000053085310'.freeze
+  CREATED_ADCREATIVE = '23843093148650049'.freeze
 
   let(:attributes) {
     {
@@ -14,7 +14,7 @@ RSpec.describe FacebookCreation::AdcreativeService do
           caption: "",
           name: "Text headline",
           description: 'This is news feed',
-          image_hash: "61b44ff5533fdea8c9663ff3efbc7b20",
+          image_hash: "a7313faa165852e5acd4a2905d40fdf6",
         }
       },
       object_type: "SHARE",
@@ -23,7 +23,7 @@ RSpec.describe FacebookCreation::AdcreativeService do
   }
   let(:facebook_account) do
     double('Facebook Account',
-      account_id: ENV['FACEBOOK_ACCOUNT_ID'],
+      api_identificator: ENV['FACEBOOK_ACCOUNT_ID'],
       api_token: ENV['FACEBOOK_API_TOKEN'],
       api_secret: ENV['FACEBOOK_APP_SECRET'])
   end

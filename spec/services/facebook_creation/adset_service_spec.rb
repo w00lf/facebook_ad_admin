@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe FacebookCreation::AdsetService do
-  CREATED_CAMPAIGN_ID = '120330000053077610'
-  CREATED_ADSET_ID = '120330000053077910'
+  CREATED_CAMPAIGN_ID = '23843093131260049'
+  CREATED_ADSET_ID = '23843093138150049'
   let(:attributes) {
     {
       :name=>"MX - (18+) - 1",
@@ -10,7 +10,7 @@ RSpec.describe FacebookCreation::AdsetService do
       :optimization_goal=>"OFFSITE_CONVERSIONS",
       :bid_strategy=>"LOWEST_COST_WITHOUT_CAP",
       :promoted_object=> {
-        :pixel_id=>"1573475279464976",
+        :pixel_id=>"2179086309031083",
         :custom_event_type=>"LEAD"
       },
       :daily_budget=>500000,
@@ -29,7 +29,7 @@ RSpec.describe FacebookCreation::AdsetService do
   }
   let(:facebook_account) do
     double('Facebook Account',
-      account_id: ENV['FACEBOOK_ACCOUNT_ID'],
+      api_identificator: ENV['FACEBOOK_ACCOUNT_ID'],
       api_token: ENV['FACEBOOK_API_TOKEN'],
       api_secret: ENV['FACEBOOK_APP_SECRET'])
   end

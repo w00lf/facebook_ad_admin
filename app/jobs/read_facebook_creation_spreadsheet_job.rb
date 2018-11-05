@@ -9,21 +9,22 @@ class ReadFacebookCreationSpreadsheetJob
     worksheet = spreadsheet.worksheets[0]
     headers = worksheet.rows[0].map(&:strip)
     worksheet.rows.each.with_index(1) do |row, i|
-      attributes = headers.zip(row).to_h
-      logger.info("Got attributes: #{attributes}")
-      # Skip headers and not ready rows
-      next if i == 1 || attributes['Status'] != READY_STATUS
-      import_result = ImportResult.create(status: 'in_progress')
-      account_id = attributes['Account id']
-      facebook_account = FacebookAccount.find_by(api_identificator: account_id)
-      if facebook_account.nil?
+      begin
+        attributes = headers.zip(row).to_h
+        logger.info("Got attributes: #{attributes}")
+        # Skip headers and not ready rows
+        next if i == 1 || attributes['Status'] != READY_STATUS
+        import_result = ImportResult.create(status: 'in_progress')
+        account_id = attributes['Account id']
+        facebook_account = FacebookAccount.find_by!(api_identificator: account_id)
+        import_result.update(facebook_account: facebook_account)
+        serialize_attribute_and_create_entries(facebook_account, attributes)
+        import_result.update(status: 'ok')
+        worksheet[i, column_index(headers, 'Status')] = "done"
+      rescue => e
         not_found_account_error(import_result, account_id)
-        worksheet[i, column_index(headers, 'Status')] = "Cannot found account with id: #{account_id}"
-        next
+        worksheet[i, column_index(headers, 'Status')] = e.message
       end
-      # import_result.update(facebook_account: facebook_account)
-      serialize_attribute_and_create_entries(facebook_account, attributes)
-      worksheet[i, column_index(headers, 'Status')] = "done"
     end
     worksheet.save
   end
@@ -51,7 +52,7 @@ class ReadFacebookCreationSpreadsheetJob
 
   def create_adcreative(facebook_account, attributes)
     parsed_attributes = FacebookCreation::AdcreativeSerializer.new(attributes).as_json
-    FacebookCreation::AdsetService.call(facebook_account, parsed_attributes)
+    FacebookCreation::AdcreativeService.call(facebook_account, parsed_attributes)
   end
 
   def create_image(facebook_account, url)
@@ -61,7 +62,7 @@ class ReadFacebookCreationSpreadsheetJob
   def create_ad(facebook_account, attributes, adset, adcreative)
     parsed_attributes = {
       name: attributes.fetch('Ad Name'),
-      status: 'PAUSED',
+      status: 'ACTIVE',
       adset_id: adset.id,
       creative: { creative_id: adcreative.id }
     }
