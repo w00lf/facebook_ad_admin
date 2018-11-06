@@ -31,10 +31,15 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.filter_sensitive_data('<FACEBOOK_API_TOKEN>') { facebook_api_token }
   config.filter_sensitive_data('<FACEBOOK_ACCOUNT_ID>') { facebook_app_id }
+  config.filter_sensitive_data('<FACEBOOK_SECRET_PROOF>') { facebook_secret_proof }
   google_account_data = YAML.load(File.read(Rails.root.join('config', 'config.json')))
   %w[client_id client_secret refresh_token].each do |attribute|
     config.filter_sensitive_data("<GOOGLE_#{attribute.upcase}>") { google_account_data.fetch(attribute) }
   end
+end
+
+def facebook_secret_proof
+  ENV['FACEBOOK_SECRET_PROOF']
 end
 
 def facebook_api_token
