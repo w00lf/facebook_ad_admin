@@ -31,17 +31,35 @@ class ReadFacebookCreationSpreadsheetJob
 
   private
 
+  def ad_account(facebook_account)
+    account_id = facebook_account.api_identificator
+    session = FacebookAds::Session.new(access_token: facebook_account.api_token, app_secret: facebook_account.api_secret)
+    FacebookAds::AdAccount.get("act_#{account_id}", %w[name id currency account_status], session)
+  end
+
   def serialize_attribute_and_create_entries(facebook_account, attributes)
-    campaign = create_campign(facebook_account, attributes)
-    adset = create_adset(facebook_account, attributes,  campaign)
+    campaign = find_or_create_campaign(facebook_account, attributes)
+    adset = find_or_create_adset(facebook_account, attributes,  campaign)
     image_hash = create_image(facebook_account, attributes.fetch('Image')).first.hash
     adcreative = create_adcreative(facebook_account, attributes.merge('Image hash' => image_hash))
     create_ad(facebook_account, attributes, adset, adcreative)
   end
 
-  def create_campign(facebook_account, attributes)
+  def find_or_create_campaign(facebook_account, attributes)
+    existing = ad_account(facebook_account).campaigns(fields: ['name']).find {|n| n.name == attributes.fetch('Campaign Name') }
+    return existing if existing
+    create_campaign(facebook_account, attributes)
+  end
+
+  def create_campaign(facebook_account, attributes)
     parsed_attributes = FacebookCreation::CampaignSerializer.new(attributes).as_json
     FacebookCreation::CampaignService.call(facebook_account, parsed_attributes)
+  end
+
+  def find_or_create_adset(facebook_account, attributes, campaign)
+    existing = ad_account(facebook_account).adsets(fields: ['name']).find {|n| n.name == attributes.fetch('Ad Set Name') }
+    return existing if existing
+    create_adset(facebook_account, attributes, campaign)
   end
 
   def create_adset(facebook_account, attributes, campaign)
@@ -51,7 +69,7 @@ class ReadFacebookCreationSpreadsheetJob
   end
 
   def create_adcreative(facebook_account, attributes)
-    parsed_attributes = FacebookCreation::AdcreativeSerializer.new(attributes).as_json
+    parsed_attributes = FacebookCreation::AdcreativeSerializer.new(facebook_account, attributes).as_json
     FacebookCreation::AdcreativeService.call(facebook_account, parsed_attributes)
   end
 
