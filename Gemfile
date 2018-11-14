@@ -40,6 +40,8 @@ gem 'google_drive', '2.1.11'
 gem 'money', '~>6.11.0'
 gem 'eu_central_bank'
 
+gem 'rest-client'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
