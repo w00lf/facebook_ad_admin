@@ -1,8 +1,12 @@
 ActiveAdmin.register FacebookAccount do
   permit_params :active, :name, :api_identificator, :api_token, :api_secret, :facebook_group_account_id
 
+  filter :name
+  filter :active
+  filter :facebook_group_account
+
   member_action :rescan do
-    FacebookAccountStatsRetrieveJob.perform_async((1.days.ago).to_i, resource.id)
+    FacebookAccountStatsRetrieveJob.perform_later((1.days.ago).to_i, resource.id)
     redirect_to resource_path, notice: 'Queued rescan of the account'
   end
 

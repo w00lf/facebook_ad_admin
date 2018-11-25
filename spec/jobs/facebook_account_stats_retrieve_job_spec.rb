@@ -25,7 +25,7 @@ RSpec.describe FacebookAccountStatsRetrieveJob do
 
   it 'Sets SendToGoogleSpreadsheetFacebookAccountJob job with received data' do
     expect(SendToGoogleSpreadsheetFacebookAccountJob)
-      .to(receive(:perform_async).with(date_unix,
+      .to(receive(:perform_later).with(date_unix,
                                       facebook_account.id,
                                       result_data,
                                       FacebookAccountStatsRetrieveJob::COLUMN_HEADERS))
@@ -36,7 +36,7 @@ RSpec.describe FacebookAccountStatsRetrieveJob do
 
   it 'When facebook library returns NoMethodError because of Missing custom_event_type, ignores it' do
     expect(SendToGoogleSpreadsheetFacebookAccountJob)
-      .to(receive(:perform_async).with(date_unix,
+      .to(receive(:perform_later).with(date_unix,
                                       facebook_account.id,
                                       next_result_data,
                                       FacebookAccountStatsRetrieveJob::COLUMN_HEADERS))

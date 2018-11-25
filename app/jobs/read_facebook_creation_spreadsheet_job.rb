@@ -1,5 +1,6 @@
-class ReadFacebookCreationSpreadsheetJob
-  include Sidekiq::Worker
+class ReadFacebookCreationSpreadsheetJob < ApplicationJob
+  queue_as :default
+
   READY_STATUS = 'ready'
 
   def perform(file_name:, config_file:)

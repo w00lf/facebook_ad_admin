@@ -1,5 +1,5 @@
-class SendToBinomApiFacebookCampaignJob
-  include Sidekiq::Worker
+class SendToBinomApiFacebookCampaignJob < ApplicationJob
+  queue_as :default
 
   def perform(date_unix, campaign_id, costs, currency)
     eu_bank = EuCentralBank.new

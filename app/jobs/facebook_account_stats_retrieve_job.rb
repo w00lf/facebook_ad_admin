@@ -1,5 +1,5 @@
-class FacebookAccountStatsRetrieveJob
-  include Sidekiq::Worker
+class FacebookAccountStatsRetrieveJob < ApplicationJob
+  queue_as :default
 
   ACCOUNT_STATUS = {
     1 => 'Active',
@@ -187,10 +187,10 @@ class FacebookAccountStatsRetrieveJob
                 end
               end.compact
     logger.info(result)
-    SendToGoogleSpreadsheetFacebookAccountJob.perform_async(date_unix, facebook_account_id, result, COLUMN_HEADERS)
+    SendToGoogleSpreadsheetFacebookAccountJob.perform_later(date_unix, facebook_account_id, result, COLUMN_HEADERS)
     logger.info(binom_costs_hash)
     binom_costs_hash.each_pair do |campaign_id, compaign_hash|
-      SendToBinomApiFacebookCampaignJob.perform_async(date_unix, campaign_id, compaign_hash['costs'], compaign_hash['currency'])
+      SendToBinomApiFacebookCampaignJob.perform_later(date_unix, campaign_id, compaign_hash['costs'], compaign_hash['currency'])
     end
     parse_result.update!(status: 'ok')
   rescue => e

@@ -7,6 +7,7 @@ end
 
 gem 'pg', '1.0.0'
 gem 'activeadmin'
+gem 'activeadmin_addons'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
@@ -41,6 +42,8 @@ gem 'money', '~>6.11.0'
 gem 'eu_central_bank'
 
 gem 'rest-client'
+
+gem 'lograge'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
