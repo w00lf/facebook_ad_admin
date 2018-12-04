@@ -6,7 +6,7 @@ class SendToGoogleSpreadsheetFacebookAccountJob < ApplicationJob
     facebook_account  = FacebookAccount.find(facebook_account_id)
     session = GoogleDrive::Session.from_config(Rails.root.join('config', 'config.json').to_s)
     logger = Logger.new(File.new(Rails.root.join('tmp', 'google_spreadsheet.log'), 'a+'))
-    file_name = "Report Facebook Advertisment Report, #{date.strftime("%B")}"
+    file_name = "#{date.strftime("%B")} #{date.strftime("%y")}"
     spreadsheet = session.spreadsheet_by_title(file_name)
     just_created = false
     unless spreadsheet
