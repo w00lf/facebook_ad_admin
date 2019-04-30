@@ -23,6 +23,12 @@ RSpec.describe FacebookAccountStatsRetrieveJob do
       .perform(date_unix, facebook_account.id)
   end
 
+  it 'Does not raise error' do
+    VCR.use_cassette('facebook_report/all_spreadsheet/success') do
+      expect { subject }.to_not raise_error
+    end
+  end
+
   it 'Sets SendToGoogleSpreadsheetFacebookAccountJob job with received data' do
     expect(SendToGoogleSpreadsheetFacebookAccountJob)
       .to(receive(:perform_later).with(date_unix,
