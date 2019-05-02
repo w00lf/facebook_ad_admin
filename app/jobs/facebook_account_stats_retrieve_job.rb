@@ -54,8 +54,8 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
       SendToBinomApiFacebookCampaignJob.perform_later(date_unix, campaign_hash['campaign_id'], campaign_hash['costs'], campaign_hash['currency'], campaign_hash['adset_name'])
     end
     parse_result.update!(status: 'ok')
-  # rescue => e
-  #   parse_result.update!(status: 'error', error_type: e.class, error_text: e.message)
+  rescue => e
+    parse_result.update!(status: 'error', error_type: e.class, error_text: e.message)
   ensure
     log_file.close
   end
@@ -93,20 +93,23 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
       if binom_adset
         result = {
           'campaign_id' => binom_campaign.binom_identificator,
-          'costs' => 0,
           'currency' => ad_account.currency,
           'costs' => adset_spend.to_f,
           'adset_name' => binom_adset.name
         }
         binom_costs_hash.append(result)
       else
-        result = binom_campaign.find { |n| n['campaign_id'] == binom_campaign.binom_identificator } || { 'campaign_id' => binom_campaign.binom_identificator, 'costs' => 0, 'currency' => ad_account.currency, 'costs' => adset_spend.to_f }
-        binom_costs_hash[binom_campaign.binom_identificator]['costs'] += adset_spend.to_f
+        result = binom_campaigns.find { |n| n['campaign_id'] == binom_campaign.binom_identificator }
+        if result.nil?
+          result = {
+            'campaign_id' => binom_campaign.binom_identificator,
+            'costs' => 0,
+            'currency' => ad_account.currency
+          }
+          binom_costs_hash.append(result)
+        end
+        result['costs'] += adset_spend.to_f
       end
-
-
-      binom_costs_hash[binom_campaign.binom_identificator]['adset_name'] = binom_adset.name if binom_adset
-      binom_costs_hash[binom_campaign.binom_identificator]['costs'] += adset_spend.to_f
     else
       logger.warn("Cannot find binom_campaign for id - #{adset.campaign.id}")
     end
