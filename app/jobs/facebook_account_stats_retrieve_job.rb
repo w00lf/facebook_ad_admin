@@ -30,13 +30,14 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     logger.info("Scanning #{ad_account.name}")
 
     # Format - Binom` Hash[<camp_id><price>]
-    binom_costs_hash = {}
+    binom_costs_hash = []
     binom_campaigns = facebook_account.binom_campaigns
+    binom_adsets = facebook_account.binom_adsets
     insight_metrics = ['spend', 'cpm', 'cost_per_inline_link_click', 'inline_link_click_ctr', 'actions', 'inline_link_clicks']
     report_formated_date = date.strftime('%d/%m/%Y')
 
     result =  ad_account.adsets.map do |adset|
-                result = serialize_adset_stats(adset, ad_account, report_formated_date, binom_costs_hash, binom_campaigns)
+                result = serialize_adset_stats(adset, ad_account, report_formated_date, binom_costs_hash, binom_campaigns, binom_adsets)
                 # Only run one time for tests
                 if Rails.env.test? && result
                   break result
@@ -49,8 +50,8 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
 
     SendToGoogleSpreadsheetFacebookAccountJob.perform_later(date_unix, facebook_account_id, result, COLUMN_HEADERS)
     logger.info(binom_costs_hash)
-    binom_costs_hash.each_pair do |campaign_id, compaign_hash|
-      SendToBinomApiFacebookCampaignJob.perform_later(date_unix, campaign_id, compaign_hash['costs'], compaign_hash['currency'])
+    binom_costs_hash.each do |campaign_hash|
+      SendToBinomApiFacebookCampaignJob.perform_later(date_unix, campaign_hash['campaign_id'], campaign_hash['costs'], campaign_hash['currency'], campaign_hash['adset_name'])
     end
     parse_result.update!(status: 'ok')
   # rescue => e
@@ -67,7 +68,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     @logger = SubjectTaggedLogger.new(ActiveSupport::Logger.new(log_file), subject)
   end
 
-  def serialize_adset_stats(adset, ad_account, report_formated_date, binom_costs_hash, binom_campaigns)
+  def serialize_adset_stats(adset, ad_account, report_formated_date, binom_costs_hash, binom_campaigns, binom_adsets)
     insight_data = adset.insights.first
     # To not exceed requests quota
     sleep 10 unless Rails.env.test?
@@ -85,13 +86,29 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     unique_count = adset_unique_actions != '-' && spend != '-' ? spend.to_f / adset_unique_actions.to_f : nil
     adset_unique_action_cost = unique_count ? adset.format_money(adset.format_value(unique_count), adset.currency) : '-'
 
-    campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
+    binom_campaign = binom_campaigns.find { |n| n.facebook_campaign_identificator == adset.campaign.id }
+    binom_adset = binom_adsets.find { |n| n.facebook_adset_identificator == adset.id }
 
-    if campaign && adset_spend != '-'
-      binom_costs_hash[campaign.binom_identificator] = { 'costs' => 0, 'currency' => ad_account.currency } unless binom_costs_hash[campaign.binom_identificator]
-      binom_costs_hash[campaign.binom_identificator]['costs'] += adset_spend.to_f
+    if binom_campaign && adset_spend != '-'
+      if binom_adset
+        result = {
+          'campaign_id' => binom_campaign.binom_identificator,
+          'costs' => 0,
+          'currency' => ad_account.currency,
+          'costs' => adset_spend.to_f,
+          'adset_name' => binom_adset.name
+        }
+        binom_costs_hash.append(result)
+      else
+        result = binom_campaign.find { |n| n['campaign_id'] == binom_campaign.binom_identificator } || { 'campaign_id' => binom_campaign.binom_identificator, 'costs' => 0, 'currency' => ad_account.currency, 'costs' => adset_spend.to_f }
+        binom_costs_hash[binom_campaign.binom_identificator]['costs'] += adset_spend.to_f
+      end
+
+
+      binom_costs_hash[binom_campaign.binom_identificator]['adset_name'] = binom_adset.name if binom_adset
+      binom_costs_hash[binom_campaign.binom_identificator]['costs'] += adset_spend.to_f
     else
-      logger.warn("Cannot find campaign for id - #{adset.campaign.id}")
+      logger.warn("Cannot find binom_campaign for id - #{adset.campaign.id}")
     end
 
     [

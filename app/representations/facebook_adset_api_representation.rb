@@ -1,16 +1,19 @@
 class FacebookAdsetApiRepresentation < FacebookAPIBaseRepresenter
-  attr_accessor :object, :time_range, :logger, :currency
+  attr_accessor :object, :time_range, :logger, :currency, :parent
 
   TARGET_CONVERSION_BY_TYPE = {
     'ADD_TO_CART' => 'offsite_conversion.fb_pixel_add_to_cart',
-    'LEAD' => 'offsite_conversion.fb_pixel_lead'
+    'LEAD' => 'offsite_conversion.fb_pixel_lead',
+    'PURCHASE' => 'offsite_conversion.fb_pixel_purchase',
+    "LINK_CLICKS" => 'link_click'
   }
 
-  def initialize(object:, time_range:, logger:, currency:)
+  def initialize(object:, time_range:, logger:, currency:, parent:)
     @object = object
     @time_range = time_range
     @currency = currency
     @logger = logger
+    @parent = parent
   end
 
   def insights(insight_metrics: %w[spend cpm cost_per_inline_link_click inline_link_click_ctr actions inline_link_clicks])
@@ -21,6 +24,8 @@ class FacebookAdsetApiRepresentation < FacebookAPIBaseRepresenter
 
   def promoted_object_event_type
     if promoted_object.blank? || promoted_object == BLANK_RESPONSE
+      campaign = with_exception_control { parent.campaigns.find{|n| n['id'] == campaign_id } }
+      return campaign.objective if campaign
       logger.warn("Adset without promoted object: #{object.name}(##{object.id})")
       return ''
     end

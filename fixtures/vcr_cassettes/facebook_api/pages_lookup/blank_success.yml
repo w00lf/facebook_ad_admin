@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.2/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
+    uri: https://graph.facebook.com/v3.3/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -25,7 +25,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - FTRB830PijI
       X-Fb-Rev:

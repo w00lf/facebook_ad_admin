@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.2/search?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2&location_types%5B%5D=country&q=Mexico&type=adgeolocation
+    uri: https://graph.facebook.com/v3.3/search?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2&location_types%5B%5D=country&q=Mexico&type=adgeolocation
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -25,7 +25,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - BtB6xHgAw2b
       X-Fb-Rev:
@@ -52,18 +52,18 @@ http_interactions:
       - '412'
     body:
       encoding: ASCII-8BIT
-      string: '{"data":[{"key":"MX","name":"Mexico","type":"country","country_code":"MX","country_name":"Mexico","supports_region":true,"supports_city":true}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"},"next":"https:\/\/graph.facebook.com\/v3.2\/search?access_token=<FACEBOOK_API_TOKEN>&type=adgeolocation&location_types\u00255B0\u00255D=country&q=Mexico&limit=25&after=MAZDZD"}}'
-    http_version: 
+      string: '{"data":[{"key":"MX","name":"Mexico","type":"country","country_code":"MX","country_name":"Mexico","supports_region":true,"supports_city":true}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"},"next":"https:\/\/graph.facebook.com\/v3.3\/search?access_token=<FACEBOOK_API_TOKEN>&type=adgeolocation&location_types\u00255B0\u00255D=country&q=Mexico&limit=25&after=MAZDZD"}}'
+    http_version:
   recorded_at: Mon, 05 Nov 2018 15:35:55 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.2/search?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2&q=Spanish&type=adlocale
+    uri: https://graph.facebook.com/v3.3/search?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2&q=Spanish&type=adlocale
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -80,7 +80,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - CxwJVTkw7EO
       X-Fb-Rev:
@@ -109,6 +109,6 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"data":[{"name":"Spanish","key":23},{"name":"Spanish (Spain)","key":7},{"name":"Spanish
         (All)","key":1002}],"paging":{"cursors":{"before":"MAZDZD","after":"MgZDZD"}}}'
-    http_version: 
+    http_version:
   recorded_at: Mon, 05 Nov 2018 15:35:55 GMT
 recorded_with: VCR 4.0.0

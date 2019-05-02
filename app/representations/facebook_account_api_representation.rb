@@ -23,10 +23,14 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
     @logger = logger
   end
 
-  def adsets(limit = 50, attributes = %w[id status name promoted_object daily_budget campaign])
+  def adsets(limit = 50, attributes = %w[id status name promoted_object daily_budget campaign_id])
     object.adsets(time_range: time_range, fields: attributes, limit: limit).map do |n|
-      FacebookAdsetApiRepresentation.new(object: n, time_range: time_range, logger: logger, currency: object.currency)
+      FacebookAdsetApiRepresentation.new(object: n, time_range: time_range, logger: logger, currency: object.currency, parent: self)
     end
+  end
+
+  def campaigns
+    campaigns ||= object.campaigns(fields: %w[objective])
   end
 
   def formated_account_status

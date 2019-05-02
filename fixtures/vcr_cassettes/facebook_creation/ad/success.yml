@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: post
-    uri: https://graph.facebook.com/v3.2/act_<FACEBOOK_ACCOUNT_ID>/ads?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
+    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/ads?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
     body:
       encoding: UTF-8
       string: adset_id=23843093138150049&creative=%7B%22creative_id%22%3A%2223843093148650049%22%7D&name=Ad+Name&status=PAUSED
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -25,7 +25,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - BGav5/RLKo0
       X-Fb-Rev:
@@ -53,6 +53,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"id":"23843093149950049"}'
-    http_version: 
+    http_version:
   recorded_at: Mon, 05 Nov 2018 15:32:04 GMT
 recorded_with: VCR 4.0.0

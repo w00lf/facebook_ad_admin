@@ -36,3 +36,6 @@ en:
         api_identificator: 'Account id'
       binom_campaign:
         facebook_campaign_identificator: 'Id of ad campaign from Facebook'
+    errors:
+      messages:
+        binom_topic_uniqness: 'FacebookAccount "%{account_name}" already has binded campaigns for it! Script can only work with one of options: binom_adset, binom_campaign'

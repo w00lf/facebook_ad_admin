@@ -3,6 +3,7 @@ class FacebookAccount < ApplicationRecord
   validate :correct_request, on: :create
 
   has_many :binom_campaigns
+  has_many :binom_adsets
   has_many :parse_results
   belongs_to :facebook_group_account, optional: true
 

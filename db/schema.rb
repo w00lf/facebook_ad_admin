@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181101090845) do
+ActiveRecord::Schema.define(version: 20190430122717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 20181101090845) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "binom_adsets", force: :cascade do |t|
+    t.string "facebook_adset_identificator"
+    t.string "name"
+    t.bigint "facebook_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facebook_account_id"], name: "index_binom_adsets_on_facebook_account_id"
   end
 
   create_table "binom_campaigns", force: :cascade do |t|
@@ -95,6 +104,7 @@ ActiveRecord::Schema.define(version: 20181101090845) do
     t.index ["facebook_account_id"], name: "index_parse_results_on_facebook_account_id"
   end
 
+  add_foreign_key "binom_adsets", "facebook_accounts"
   add_foreign_key "binom_campaigns", "facebook_accounts"
   add_foreign_key "facebook_accounts", "facebook_group_accounts"
   add_foreign_key "import_results", "facebook_accounts", on_delete: :cascade

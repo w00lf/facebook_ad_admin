@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.2/act_<FACEBOOK_ACCOUNT_ID>?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=name,id,currency,account_status
+    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=name,id,currency,account_status
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -25,7 +25,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - Ayq1XHN/kuV
       X-Fb-Rev:
@@ -51,17 +51,17 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"name":"New Sandbox Ad Account","id":"act_<FACEBOOK_ACCOUNT_ID>","currency":"USD","account_status":1}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Nov 2018 12:34:32 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.2/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=id,status,name,promoted_object,daily_budget,campaign&limit=50&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=id,status,name,promoted_object,daily_budget,campaign_id&limit=50&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -78,7 +78,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - HoHbTcHWQEf
       X-Fb-Rev:
@@ -119,17 +119,17 @@ http_interactions:
         gender test","promoted_object":{"custom_event_type":"LEAD"},"daily_budget":"100","campaign":{"id":"120330000052891710"}},{"id":"120330000052899110","status":"PAUSED","name":"adset
         test","promoted_object":{"custom_event_type":"LEAD"},"daily_budget":"100","campaign":{"id":"120330000052891710"}},{"id":"120330000052898310","status":"PAUSED","name":"adset
         test","daily_budget":"100","campaign":{"id":"120330000052891710"}}],"paging":{"cursors":{"before":"MTIwMzMwMDAwMDUzMTAyOTEw","after":"MTIwMzMwMDAwMDUyODk4MzEw"}}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Nov 2018 12:34:33 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.2/120330000053102910/insights?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v3.3/120330000053102910/insights?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -148,7 +148,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - FZZGMREXvth
       X-Fb-Rev:
@@ -174,6 +174,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"data":[{"spend":"10","cpm":"100","inline_link_clicks":"0","date_start":"2018-11-05","date_stop":"2018-11-05"}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"}}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Nov 2018 12:34:33 GMT
 recorded_with: VCR 4.0.0
