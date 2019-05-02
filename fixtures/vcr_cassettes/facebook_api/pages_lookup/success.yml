@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.2/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
+    uri: https://graph.facebook.com/v3.3/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.2
+      - fbbizsdk-ruby-v3.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -25,7 +25,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.2
+      - v3.3
       X-Fb-Trace-Id:
       - FTRB830PijI
       X-Fb-Rev:
@@ -55,6 +55,6 @@ http_interactions:
       string: '{"data":[{"access_token":"EAAHAMFn9XpUBALP0Ek9ooNNljTGe0cqZAVd37XoNvuoumiIWgMFnvZB090duxa5URQn0ZAw34XiXZBs0KlUFlHKQjug6TBW5KZAy83o4pPuL0hITHG7jmSfd5XmyXMjDz1ni4eTsDSpXFAn2qbxSnbR0O2je7r6MacWlEuXbuRQZDZD","category":"Business
         Service","category_list":[{"id":"187133811318958","name":"Business Service"}],"name":"Mikhail
         Tretiakov","id":"250515082286181","tasks":["ANALYZE","ADVERTISE","MODERATE","CREATE_CONTENT","MANAGE"]}],"paging":{"cursors":{"before":"MjUwNTE1MDgyMjg2MTgx","after":"MjUwNTE1MDgyMjg2MTgx"}}}'
-    http_version: 
+    http_version:
   recorded_at: Sun, 11 Nov 2018 08:45:03 GMT
 recorded_with: VCR 4.0.0
