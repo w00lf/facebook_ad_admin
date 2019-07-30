@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:facebook/facebook-ruby-business-sdk.git
+  revision: b3e5911b1330616f07ef36c39d4a3fd7531efea7
+  specs:
+    facebookbusiness (0.4.0.0)
+      faraday (~> 0.15)
+      json (~> 2.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -154,9 +162,6 @@ GEM
       money (~> 6.11.0)
       nokogiri (~> 1.8.1)
     execjs (2.7.0)
-    facebookbusiness (0.3.3.0)
-      faraday
-      json
     factory_bot (4.10.0)
       activesupport (>= 3.0.0)
     faraday (0.15.4)
@@ -245,7 +250,7 @@ GEM
     money (6.11.3)
       i18n (>= 0.6.4, < 1.1)
     multi_json (1.13.1)
-    multipart-post (2.0.0)
+    multipart-post (2.1.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
@@ -427,7 +432,7 @@ DEPENDENCIES
   config
   devise
   eu_central_bank
-  facebookbusiness (~> 0.3.0)
+  facebookbusiness!
   factory_bot
   google_drive (= 2.1.11)
   jbuilder (~> 2.5)
