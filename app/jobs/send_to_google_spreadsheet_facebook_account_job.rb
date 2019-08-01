@@ -7,11 +7,14 @@ class SendToGoogleSpreadsheetFacebookAccountJob < ApplicationJob
     session = GoogleDrive::Session.from_config(Rails.root.join('config', 'config.json').to_s)
     logger = Logger.new(File.new(Rails.root.join('tmp', 'google_spreadsheet.log'), 'a+'))
     file_name = "#{date.strftime("%B")} #{date.strftime("%y")}"
-    spreadsheet = session.spreadsheet_by_title(file_name)
+
+    collection = session.collection_by_url(Settings.google_drive.folder_url)
+    spreadsheet = collection.file_by_title(file_name)
+
     just_created = false
     unless spreadsheet
       just_created = true
-      spreadsheet = session.create_spreadsheet(file_name)
+      spreadsheet = collection.create_spreadsheet(file_name)
     end
     logger.info("Trying to write in spreadsheet")
     result_hash = {

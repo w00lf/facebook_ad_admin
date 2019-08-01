@@ -32,3 +32,4 @@ config/settings/production.yml
 config/settings/development.yml
 *access.txt
 config.json
+config/config_old.json
