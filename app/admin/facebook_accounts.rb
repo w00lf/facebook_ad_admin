@@ -1,5 +1,5 @@
 ActiveAdmin.register FacebookAccount do
-  permit_params :active, :name, :api_identificator, :api_token, :api_secret, :facebook_group_account_id
+  permit_params :active, :name, :api_identificator, :api_token, :facebook_group_account_id
 
   filter :name
   filter :active
@@ -23,7 +23,6 @@ ActiveAdmin.register FacebookAccount do
     column :api_token do |obj|
       truncate(obj.api_token)
     end
-    column :api_secret
     column :facebook_group_account
     column :parse_status do |obj|
       last_parse_result = obj.parse_results.last
