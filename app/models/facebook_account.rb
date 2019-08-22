@@ -1,5 +1,5 @@
 class FacebookAccount < ApplicationRecord
-  validates :name, :api_identificator, :api_token, :api_secret, presence: true
+  validates :name, :api_identificator, :api_token, presence: true
   validate :correct_request, on: :create
 
   has_many :binom_campaigns
