@@ -34,7 +34,7 @@ class ReadFacebookCreationSpreadsheetJob < ApplicationJob
 
   def ad_account(facebook_account)
     account_id = facebook_account.api_identificator
-    session = FacebookAds::Session.new(access_token: facebook_account.api_token, app_secret: facebook_account.api_secret)
+    session = FacebookAds::Session.new(access_token: facebook_account.api_token)
     FacebookAds::AdAccount.get("act_#{account_id}", %w[name id currency account_status], session)
   end
 
