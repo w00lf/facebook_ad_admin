@@ -21,6 +21,7 @@ ActiveAdmin.register FacebookAccount do
       f.input :name
       f.input :api_identificator
       f.input :api_token
+      f.input :active
       f.actions
     end
   end
