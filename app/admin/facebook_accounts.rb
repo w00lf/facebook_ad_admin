@@ -14,6 +14,17 @@ ActiveAdmin.register FacebookAccount do
     link_to 'Rescan for yesterday', rescan_admin_facebook_account_path(resource)
   end
 
+  form do |f|
+    f.inputs do
+      f.semantic_errors(*f.object.errors.keys)
+      f.input :facebook_group_account
+      f.input :name
+      f.input :api_identificator
+      f.input :api_token
+      f.actions
+    end
+  end
+
 
   index do
     id_column
