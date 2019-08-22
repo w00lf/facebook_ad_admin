@@ -1,8 +1,7 @@
 module FacebookApi
   class PagesLookup
     def self.call(facebook_account)
-      session =  FacebookAds::Session.new(access_token: facebook_account.api_token,
-                                          app_secret: facebook_account.api_secret)
+      session =  FacebookAds::Session.new(access_token: facebook_account.api_token)
       request = FacebookAds::APIRequest.new(:get,
               'me/accounts',
               session: session

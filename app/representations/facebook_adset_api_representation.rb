@@ -1,11 +1,25 @@
 class FacebookAdsetApiRepresentation < FacebookAPIBaseRepresenter
   attr_accessor :object, :time_range, :logger, :currency, :parent
 
+  # "START_TRIAL",
+  # "SEARCH"
+  # "CONTACT"
+  # "CUSTOMIZE_PRODUCT"
+  # "FIND_LOCATION"
+  # "SCHEDULE"
+  # "SUBMIT_APPLICATION"
+  # "DONATE"
   TARGET_CONVERSION_BY_TYPE = {
     'ADD_TO_CART' => 'offsite_conversion.fb_pixel_add_to_cart',
+    'COMPLETE_REGISTRATION' => 'offsite_conversion.fb_pixel_complete_registration',
     'LEAD' => 'offsite_conversion.fb_pixel_lead',
     'PURCHASE' => 'offsite_conversion.fb_pixel_purchase',
-    "LINK_CLICKS" => 'link_click'
+    "ADD_PAYMENT_INFO" => 'offsite_conversion.fb_pixel_add_payment_info',
+    "ADD_TO_WISHLIST" => 'offsite_conversion.fb_pixel_add_to_wishlist',
+    "CONTENT_VIEW" => 'offsite_conversion.fb_pixel_view_content',
+    "INITIATED_CHECKOUT" => 'offsite_conversion.fb_pixel_initiate_checkout',
+    "LINK_CLICKS" => 'link_click',
+    "SUBSCRIBE" => 'subscribe'
   }
 
   def initialize(object:, time_range:, logger:, currency:, parent:)

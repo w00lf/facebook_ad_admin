@@ -10,7 +10,7 @@ class FacebookAccount < ApplicationRecord
   private
 
   def correct_request
-    session = FacebookAds::Session.new(access_token: api_token, app_secret: api_secret)
+    session = FacebookAds::Session.new(access_token: api_token)
     FacebookAds::AdAccount.get("act_#{api_identificator}", 'name', session).name
   rescue => e
     Rails.logger.error(e)
