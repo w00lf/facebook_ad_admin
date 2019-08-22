@@ -18,7 +18,7 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
     date = 1.days.ago if date.nil?
     @time_range = { 'since' => date.strftime('%Y-%m-%d'),  'until' => date.strftime('%Y-%m-%d') }
     account_id = facebook_account.api_identificator
-    @session = FacebookAds::Session.new(access_token: facebook_account.api_token, app_secret: facebook_account.api_secret)
+    @session = FacebookAds::Session.new(access_token: facebook_account.api_token)
     @object = FacebookAds::AdAccount.get("act_#{account_id}", %w[name id currency account_status], session)
     @logger = logger
   end
