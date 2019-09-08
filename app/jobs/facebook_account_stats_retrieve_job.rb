@@ -17,6 +17,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     'CPC (Link)',
     'CTR (Link)',
     'Clicks',
+    'Frequency',
     'image/vid'
   ]
 
@@ -33,7 +34,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     binom_costs_hash = []
     binom_campaigns = facebook_account.binom_campaigns
     binom_adsets = facebook_account.binom_adsets
-    insight_metrics = ['spend', 'cpm', 'cost_per_inline_link_click', 'inline_link_click_ctr', 'actions', 'inline_link_clicks']
+
     report_formated_date = date.strftime('%d/%m/%Y')
 
     result =  ad_account.adsets.map do |adset|
@@ -127,7 +128,8 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
       insight_data.formated_cpm,
       insight_data.formated_cost_per_inline_link_click,
       insight_data.formated_inline_link_click_ctr,
-      insight_data.inline_link_clicks
+      insight_data.inline_link_clicks,
+      insight_data.frequency
     ]
   end
 end

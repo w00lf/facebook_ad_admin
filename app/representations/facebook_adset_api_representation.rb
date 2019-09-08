@@ -30,7 +30,7 @@ class FacebookAdsetApiRepresentation < FacebookAPIBaseRepresenter
     @parent = parent
   end
 
-  def insights(insight_metrics: %w[spend cpm cost_per_inline_link_click inline_link_click_ctr actions inline_link_clicks])
+  def insights(insight_metrics: %w[spend cpm cost_per_inline_link_click inline_link_click_ctr actions inline_link_clicks frequency])
     object.insights(fields: insight_metrics, time_range: time_range).map do |insight|
       FacebookInsightAPIRepresentation.new(object: insight, time_range: time_range, logger: logger, currency: currency)
     end
