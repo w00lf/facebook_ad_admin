@@ -100,7 +100,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
         }
         binom_costs_hash.append(result)
       else
-        result = binom_campaigns.find { |n| n['campaign_id'] == binom_campaign.binom_identificator }
+        result = binom_costs_hash.find { |n| n['campaign_id'] == binom_campaign.binom_identificator }
         if result.nil?
           result = {
             'campaign_id' => binom_campaign.binom_identificator,
