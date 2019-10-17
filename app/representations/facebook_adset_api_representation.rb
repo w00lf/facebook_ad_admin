@@ -36,6 +36,12 @@ class FacebookAdsetApiRepresentation < FacebookAPIBaseRepresenter
     end
   end
 
+  def quality_ranking
+    with_exception_control do
+      object.ads.first.insights(fields: ['quality_ranking'], time_range: time_range).first.try(:[], :quality_ranking)
+    end
+  end
+
   def promoted_object_event_type
     if promoted_object.blank? || promoted_object == BLANK_RESPONSE
       campaign = with_exception_control { parent.campaigns.find{|n| n['id'] == campaign_id } }
