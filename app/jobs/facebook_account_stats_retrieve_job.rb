@@ -18,6 +18,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     'CTR (Link)',
     'Clicks',
     'Frequency',
+    'Quality Ranking',
     'image/vid'
   ]
 
@@ -129,7 +130,8 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
       insight_data.formated_cost_per_inline_link_click,
       insight_data.formated_inline_link_click_ctr,
       insight_data.inline_link_clicks,
-      insight_data.frequency
+      insight_data.frequency,
+      adset.quality_ranking
     ]
   end
 end
