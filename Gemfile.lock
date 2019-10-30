@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:facebook/facebook-ruby-business-sdk.git
-  revision: b3e5911b1330616f07ef36c39d4a3fd7531efea7
+  revision: e864a1f09b5087b67b2a1a8583d76da61fc1c981
   specs:
-    facebookbusiness (0.4.0.0)
+    facebookbusiness (0.5.0.0)
       faraday (~> 0.15)
       json (~> 2.2)
 
@@ -164,7 +164,7 @@ GEM
     execjs (2.7.0)
     factory_bot (4.10.0)
       activesupport (>= 3.0.0)
-    faraday (0.15.4)
+    faraday (0.17.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     formtastic (3.1.5)
@@ -458,4 +458,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.17.1
+   1.17.3
