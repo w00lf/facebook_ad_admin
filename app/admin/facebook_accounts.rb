@@ -5,6 +5,15 @@ ActiveAdmin.register FacebookAccount do
   filter :active
   filter :facebook_group_account
 
+  member_action :hide_comments do
+    FacebookAccountHideCommentsJob.perform_later(resource.id)
+    redirect_to resource_path, notice: 'Queued hide comments on this account'
+  end
+
+  action_item :hide_comments, only: :show do
+    link_to 'Hide comments', hide_comments_admin_facebook_account_path(resource)
+  end
+
   member_action :rescan do
     FacebookAccountStatsRetrieveJob.perform_later((1.days.ago).to_i, resource.id)
     redirect_to resource_path, notice: 'Queued rescan of the account'

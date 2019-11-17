@@ -16,18 +16,6 @@ class FacebookAPIBaseRepresenter
     value.to_f.round(2)
   end
 
-  protected
-
-  def ignored_exception?(e)
-    # All these exceptions occur when facebook request does not receive or recive blank data for attribute
-    e.message =~ /load! is not supported for this object/ ||
-      e.message =~ /undefined method `gsub' for nil:NilClass/
-  end
-
-  def retriable_exception?(e)
-    e.message =~ /User request limit reached/
-  end
-
   def with_exception_control(&block)
     retry_count = 0
     yield
@@ -42,6 +30,18 @@ class FacebookAPIBaseRepresenter
   rescue NoMethodError, RuntimeError => e
     return BLANK_RESPONSE if ignored_exception?(e)
     raise e
+  end
+
+  protected
+
+  def ignored_exception?(e)
+    # All these exceptions occur when facebook request does not receive or recive blank data for attribute
+    e.message =~ /load! is not supported for this object/ ||
+      e.message =~ /undefined method `gsub' for nil:NilClass/
+  end
+
+  def retriable_exception?(e)
+    e.message =~ /User request limit reached/
   end
 
   def currency_info
