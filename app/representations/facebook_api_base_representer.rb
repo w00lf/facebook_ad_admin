@@ -32,7 +32,9 @@ class FacebookAPIBaseRepresenter
     raise e
   end
 
-  protected
+  def retriable_exception?(e)
+    e.message =~ /User request limit reached/
+  end
 
   def ignored_exception?(e)
     # All these exceptions occur when facebook request does not receive or recive blank data for attribute
@@ -40,9 +42,7 @@ class FacebookAPIBaseRepresenter
       e.message =~ /undefined method `gsub' for nil:NilClass/
   end
 
-  def retriable_exception?(e)
-    e.message =~ /User request limit reached/
-  end
+  protected
 
   def currency_info
     @currency_info ||= JSON.load(File.read(Rails.root.join('config', 'currency_iso.json')))
