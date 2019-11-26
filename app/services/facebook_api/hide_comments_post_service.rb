@@ -7,8 +7,7 @@ module FacebookApi
       ad_account = ::FacebookAccountApiRepresentation.new(facebook_account: facebook_account, date: Time.now, logger: logger)
       account = with_exception_control { FacebookAds::User.get('me', ad_account.session).accounts.first }
       page_access_token = account.access_token
-      ad_account.adcreatives(fields: %i[id effective_object_story_id]).each do |adcreative|
-        page_post_id = with_exception_control { adcreative.effective_object_story_id }
+      ad_account.adcreatives.map(&:effective_object_story_id).each do |page_post_id|
         page_post = with_exception_control { FacebookAds::PagePost.get(page_post_id, ad_account.session) }
         comments = with_exception_control { page_post.comments(filter: 'stream', limit: 500).to_a }
         batch = FacebookAds::Batch.with_batch do
