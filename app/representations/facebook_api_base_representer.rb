@@ -18,18 +18,21 @@ class FacebookAPIBaseRepresenter
 
   def with_exception_control(&block)
     retry_count = 0
-    yield
-  rescue FacebookAds::ClientError => e
-    logger.warn("Facebook client error: #{e.message}")
-    if retry_count <= MAX_RETRIES && retriable_exception?(e)
-      sleep 120 * retry_count
-      retry
-    else
+    begin
+      yield
+    rescue FacebookAds::ClientError => e
+      logger.warn("Facebook client error: #{e.message}")
+      if retry_count <= MAX_RETRIES && retriable_exception?(e)
+        retry_count += 1
+        sleep 120 * retry_count
+        retry
+      else
+        raise e
+      end
+    rescue NoMethodError, RuntimeError => e
+      return BLANK_RESPONSE if ignored_exception?(e)
       raise e
     end
-  rescue NoMethodError, RuntimeError => e
-    return BLANK_RESPONSE if ignored_exception?(e)
-    raise e
   end
 
   def retriable_exception?(e)
