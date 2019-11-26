@@ -33,7 +33,8 @@ class FacebookAPIBaseRepresenter
   end
 
   def retriable_exception?(e)
-    e.message =~ /User request limit reached/
+    e.message =~ /User request limit reached/ ||
+      e.message =~ /Application request limit reached/
   end
 
   def ignored_exception?(e)
