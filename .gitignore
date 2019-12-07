@@ -33,3 +33,5 @@ config/settings/development.yml
 *access.txt
 config.json
 config/config_old.json
+config/deploy/production.rb
+id_dsa*
