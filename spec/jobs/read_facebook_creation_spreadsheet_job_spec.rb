@@ -14,7 +14,7 @@ RSpec.describe ReadFacebookCreationSpreadsheetJob do
       .perform(file_name: 'Facebook import', config_file: Rails.root.join('config', 'config.json').to_s)
   end
 
-  it 'Returns new adcreative id' do
+  xit 'Returns new adcreative id' do
     expect(FacebookAccount).to receive(:find_by).and_return(facebook_account)
     VCR.use_cassette('facebook_creation/all_spreadsheet/success') do
       expect(subject).to eq(true)

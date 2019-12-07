@@ -39,15 +39,15 @@ VCR.configure do |config|
 end
 
 def facebook_secret_proof
-  ENV['FACEBOOK_SECRET_PROOF']
+  ENV.fetch('FACEBOOK_SECRET_PROOF', 'test')
 end
 
 def facebook_api_token
-  ENV['FACEBOOK_API_TOKEN']
+  ENV.fetch('FACEBOOK_API_TOKEN', 'test')
 end
 
 def facebook_app_id
-  ENV['FACEBOOK_ACCOUNT_ID']
+  ENV.fetch('FACEBOOK_ACCOUNT_ID', 'test')
 end
 
 # Checks for pending migrations and applies them before tests are run.
