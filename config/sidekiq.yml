@@ -1,2 +1,9 @@
 ---
 :concurrency: 5
+:schedule:
+  facebook_parser_import:
+    cron: '0 3 * * *'   # Runs once per day, at 7:00
+    class: FacebookParserImportJob
+  facebook_hide_all_comments:
+    cron: '0 0 * * *'   # Runs once per day, at 7:00
+    class: FacebookHideAllCommentsJob

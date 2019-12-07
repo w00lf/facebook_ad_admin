@@ -1,5 +1,7 @@
-namespace :facebook_parser do
-  task import: :environment do
+class FacebookParserImportJob < ApplicationJob
+  queue_as :default
+
+  def perform
     logger = Logger.new(File.new(Rails.root.join('log', 'parser.log'), 'a+'))
     parse_day = Time.current - 1.day
     logger.info("Started parsing of account, target date - #{parse_day}")
