@@ -22,6 +22,8 @@ module FacebookApi
         end
         with_exception_control { batch.execute }
       end
+    rescue => e
+      Rails.logger.error("HideCommentsPostService: error on account #{facebook_account.id}: #{e.message}")
     end
 
     def method_missing(method, *args); end
