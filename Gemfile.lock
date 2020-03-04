@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:facebook/facebook-ruby-business-sdk.git
-  revision: 200d3e2c922e353600c2925373db00c09f1c50ed
+  revision: c777cc50623e1f3c69500a2f505ffe5822dc21da
   specs:
-    facebookbusiness (0.6.0.0)
+    facebookbusiness (0.6.0.1)
       faraday (~> 0.15)
       json (~> 2.2)
 
