@@ -1,5 +1,5 @@
 class FacebookHideAllCommentsJob < ApplicationJob
-  queue_as :default
+  queue_as :hide_comments
 
   def perform
     logger = Logger.new(File.new(Rails.root.join('log', 'hide_comments.log'), 'a+'))

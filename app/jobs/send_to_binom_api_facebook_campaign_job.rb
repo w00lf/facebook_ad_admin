@@ -1,5 +1,5 @@
 class SendToBinomApiFacebookCampaignJob < ApplicationJob
-  queue_as :default
+  queue_as :binom
 
   def perform(date_unix, campaign_id, costs, currency, adset_name = nil)
     eu_bank = EuCentralBank.new
