@@ -1,5 +1,5 @@
 ---
-:concurrency: 5
+:concurrency: 8
 :schedule:
   facebook_parser_import:
     cron: '0 3 * * *'   # Runs once per day, at 7:00
