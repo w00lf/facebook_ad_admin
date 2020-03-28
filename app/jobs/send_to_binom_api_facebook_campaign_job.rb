@@ -6,12 +6,9 @@ class SendToBinomApiFacebookCampaignJob < ApplicationJob
   def perform(date_unix, campaign_id, costs, currency, adset_name = nil)
     retries = 0
     begin
-      eu_bank = EuCentralBank.new
-      Money.default_bank = eu_bank
-      eu_bank.update_rates
-
       date_string = Time.at(date_unix).strftime('%Y-%m-%d')
-      usd_costs = currency == "USD" ? costs : eu_bank.exchange(costs * 100, currency, "USD").to_f
+      money = Money.new(costs * 100, currency)
+      usd_costs = currency == "USD" ? costs : money.exchange_to(:USD).to_f
       # 1 - Cost (full cost), 2 - CPC (cost per click)
       # date - 12 == custom date
       uri = if adset_name
