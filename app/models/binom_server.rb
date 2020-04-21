@@ -3,6 +3,6 @@ class BinomServer < ApplicationRecord
   validates :url, presence: true
 
   def name
-    url
+    "#{id}, #{url}, #{api_key}"
   end
 end
