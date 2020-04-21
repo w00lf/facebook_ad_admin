@@ -53,7 +53,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     SendToGoogleSpreadsheetFacebookAccountJob.perform_later(date_unix, facebook_account_id, result, COLUMN_HEADERS)
     logger.info(binom_costs_hash)
     binom_costs_hash.each do |campaign_hash|
-      SendToBinomApiFacebookCampaignJob.perform_later(date_unix, campaign_hash['campaign_id'], campaign_hash['costs'], campaign_hash['currency'], campaign_hash['adset_name'])
+      SendToBinomApiFacebookCampaignJob.perform_later(date_unix, campaign_hash['binom_server_id'], campaign_hash['campaign_id'], campaign_hash['costs'], campaign_hash['currency'], campaign_hash['adset_name'])
     end
     parse_result.update!(status: 'ok')
   rescue => e
@@ -94,6 +94,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     if binom_campaign && adset_spend != '-'
       if binom_adset
         result = {
+          'binom_server_id' => binom_campaign.binom_server.id,
           'campaign_id' => binom_campaign.binom_identificator,
           'currency' => ad_account.currency,
           'costs' => adset_spend.to_f,
@@ -104,6 +105,7 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
         result = binom_costs_hash.find { |n| n['campaign_id'] == binom_campaign.binom_identificator }
         if result.nil?
           result = {
+            'binom_server_id' => binom_campaign.binom_server.id,
             'campaign_id' => binom_campaign.binom_identificator,
             'costs' => 0,
             'currency' => ad_account.currency

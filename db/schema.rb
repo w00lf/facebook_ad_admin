@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190430122717) do
+ActiveRecord::Schema.define(version: 20200421132201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 20190430122717) do
     t.bigint "facebook_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "binom_server_id"
+    t.index ["binom_server_id"], name: "index_binom_adsets_on_binom_server_id"
     t.index ["facebook_account_id"], name: "index_binom_adsets_on_facebook_account_id"
   end
 
@@ -62,7 +64,16 @@ ActiveRecord::Schema.define(version: 20190430122717) do
     t.bigint "facebook_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "binom_server_id"
+    t.index ["binom_server_id"], name: "index_binom_campaigns_on_binom_server_id"
     t.index ["facebook_account_id"], name: "index_binom_campaigns_on_facebook_account_id"
+  end
+
+  create_table "binom_servers", force: :cascade do |t|
+    t.string "url"
+    t.string "api_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "facebook_accounts", force: :cascade do |t|
@@ -104,7 +115,9 @@ ActiveRecord::Schema.define(version: 20190430122717) do
     t.index ["facebook_account_id"], name: "index_parse_results_on_facebook_account_id"
   end
 
+  add_foreign_key "binom_adsets", "binom_servers"
   add_foreign_key "binom_adsets", "facebook_accounts"
+  add_foreign_key "binom_campaigns", "binom_servers"
   add_foreign_key "binom_campaigns", "facebook_accounts"
   add_foreign_key "facebook_accounts", "facebook_group_accounts"
   add_foreign_key "import_results", "facebook_accounts", on_delete: :cascade
