@@ -7,6 +7,8 @@ class FacebookAccount < ApplicationRecord
   has_many :parse_results
   belongs_to :facebook_group_account, optional: true
 
+  scope :active, -> { where(active: true) }
+
   private
 
   def correct_request

@@ -12,7 +12,7 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
     202 => 'Any_closed'
   }
 
-  attr_accessor :time_range, :session, :ad_account, :object, :logger
+  attr_accessor :time_range, :session, :ad_account, :object, :logger, :facebook_account
 
   def initialize(facebook_account:, logger: Logger.new(STDOUT), date: nil)
     date = 1.days.ago if date.nil?
@@ -21,6 +21,7 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
     @session = FacebookAds::Session.new(access_token: facebook_account.api_token)
     @object = FacebookAds::AdAccount.get("act_#{account_id}", %w[name id currency account_status], session)
     @logger = logger
+    @facebook_account = facebook_account
   end
 
   def adsets(limit = 50, attributes = %w[id status name promoted_object daily_budget campaign_id])
