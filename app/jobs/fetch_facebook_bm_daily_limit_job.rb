@@ -1,5 +1,5 @@
 class FetchFacebookBmDailyLimitJob < ApplicationJob
-  queue_as :default
+  queue_as :cpa_rip
 
   STATS_URL = 'https://cpa.rip/check-bm/'.freeze
   DEFAULT_HEADERS = {
