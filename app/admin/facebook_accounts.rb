@@ -57,6 +57,8 @@ ActiveAdmin.register FacebookAccount do
         link_to('more', admin_parse_result_path(last_parse_result)) if last_parse_result.status == 'error'
       end
     end
+    column :account_status
+    column :disable_reason
     column :daily_limit_updated_at
     column :daily_limit do |obj|
       if obj.daily_limit_updated_at
