@@ -28,6 +28,8 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     date = Time.at(date_unix)
     initialize_logger(facebook_account)
     ad_account = ::FacebookAccountApiRepresentation.new(facebook_account: facebook_account, date: date, logger: logger)
+    facebook_account.update!(account_status: ad_account.formated_account_status,
+                             disable_reason: ad_account.formated_disable_reason)
 
     logger.info("Scanning #{ad_account.name}")
 

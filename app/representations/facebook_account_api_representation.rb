@@ -11,6 +11,18 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
     201 => 'Any_active',
     202 => 'Any_closed'
   }
+  DISABLE_REASON = {
+    0 => 'NONE',
+    1 => 'ADS_INTEGRITY_POLICY',
+    2 => 'ADS_IP_REVIEW',
+    3 => 'RISK_PAYMENT',
+    4 => 'GRAY_ACCOUNT_SHUT_DOWN',
+    5 => 'ADS_AFC_REVIEW',
+    6 => 'BUSINESS_INTEGRITY_RAR',
+    7 => 'PERMANENT_CLOSE',
+    8 => 'UNUSED_RESELLER_ACCOUNT',
+    9 => 'UNUSED_ACCOUNT'
+  }
 
   attr_accessor :time_range, :session, :ad_account, :object, :logger, :facebook_account
 
@@ -19,7 +31,7 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
     @time_range = { 'since' => date.strftime('%Y-%m-%d'),  'until' => date.strftime('%Y-%m-%d') }
     account_id = facebook_account.api_identificator
     @session = FacebookAds::Session.new(access_token: facebook_account.api_token)
-    @object = FacebookAds::AdAccount.get("act_#{account_id}", %w[name id currency account_status], session)
+    @object = FacebookAds::AdAccount.get("act_#{account_id}", %w[name id currency account_status disable_reason], session)
     @logger = logger
     @facebook_account = facebook_account
   end
@@ -39,6 +51,10 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
   end
 
   def formated_account_status
-    ACCOUNT_STATUS.fetch(account_status)
+    ACCOUNT_STATUS.fetch(account_status) rescue nil
+  end
+
+  def formated_disable_reason
+    DISABLE_REASON.fetch(disable_reason) rescue nil
   end
 end
