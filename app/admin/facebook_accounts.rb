@@ -9,6 +9,14 @@ ActiveAdmin.register FacebookAccount do
   end
 
   filter :name, as: :select, multiple: true, collection: FacebookAccount.active.pluck(:name)
+  filter :account_status,
+         as: :select,
+         multiple: true,
+         collection: FacebookAccountApiRepresentation::ACCOUNT_STATUS.values
+  filter :disable_reason,
+         as: :select,
+         multiple: true,
+         collection: FacebookAccountApiRepresentation::DISABLE_REASON.values
   filter :active
   filter :facebook_group_account
 

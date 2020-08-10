@@ -39,7 +39,7 @@ gem 'config'
 gem 'facebookbusiness', git: 'git@github.com:facebook/facebook-ruby-business-sdk.git'
 gem 'google_drive', '2.1.11'
 
-gem 'money', '~>6.11.0'
+gem 'money', '~>6.13.0'
 gem 'money-uphold-bank'
 
 gem 'rest-client'
