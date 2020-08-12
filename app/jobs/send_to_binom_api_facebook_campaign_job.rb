@@ -4,6 +4,7 @@ class SendToBinomApiFacebookCampaignJob < ApplicationJob
   MAX_RETRIES = 5
 
   def perform(date_unix, binom_server_id, campaign_id, costs, currency, adset_name = nil)
+    add_missing_rates
     server = BinomServer.find(binom_server_id)
     retries = 0
     begin
@@ -35,5 +36,11 @@ class SendToBinomApiFacebookCampaignJob < ApplicationJob
       end
       raise
     end
+  end
+
+  private
+
+  def add_missing_rates
+    Money.default_bank.add_rate('VND', 'USD', 0.000043)
   end
 end
