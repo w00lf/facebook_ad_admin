@@ -9,7 +9,8 @@ class SendToBinomApiFacebookCampaignJob < ApplicationJob
     retries = 0
     begin
       date_string = Time.at(date_unix).strftime('%Y-%m-%d')
-      money = Money.new(costs * 100, currency)
+      res_cost = currency.downcase == 'vnd' ? costs : costs * 100
+      money = Money.new(res_cost, currency)
       usd_costs = currency == "USD" ? costs : money.exchange_to(:USD).to_f
       # 1 - Cost (full cost), 2 - CPC (cost per click)
       # date - 12 == custom date
