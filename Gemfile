@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'sidekiq'
+gem 'sidekiq', '5.2.2'
 gem 'sidekiq-scheduler', '~> 3.0'
 gem 'config'
 
@@ -69,7 +69,7 @@ group :development do
   gem 'capistrano', '3.11.0', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-rails', require: false
-  gem 'capistrano-bundler', require: false
+  gem 'capistrano-bundler', '1.3.0', require: false
   gem 'capistrano3-puma', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'capistrano-npm', require: false
