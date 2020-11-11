@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FacebookCreation::AdsetSerializer do
+RSpec.xdescribe FacebookCreation::AdsetSerializer do
   MAIN_ATTRIBUTES = [
     "Ad Set Name",
     'Pixel Id' ,

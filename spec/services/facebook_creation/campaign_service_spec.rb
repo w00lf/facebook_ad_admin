@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FacebookCreation::CampaignService do
+RSpec.xdescribe FacebookCreation::CampaignService do
   let(:attributes) {
     {
       objective: "CONVERSIONS",

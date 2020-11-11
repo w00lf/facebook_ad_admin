@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FacebookCreation::AdService do
+RSpec.xdescribe FacebookCreation::AdService do
   CREATED_ADCREATIVE = '23843093148650049'.freeze
   CREATED_ADSET_ID = '23843093138150049'.freeze
   CREATED_AD_ID = '23843093149950049'.freeze

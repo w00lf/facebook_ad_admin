@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adimages?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adimages?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
     body:
       encoding: ASCII-8BIT
       string: !binary |-

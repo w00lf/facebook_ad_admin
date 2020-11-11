@@ -3,9 +3,8 @@ require 'rails_helper'
 RSpec.describe FacebookApi::PagesLookup do
   let(:facebook_account) do
     double('Facebook Account',
-      api_identificator: ENV['FACEBOOK_ACCOUNT_ID'],
-      api_token: ENV['FACEBOOK_API_TOKEN'],
-      api_secret: ENV['FACEBOOK_APP_SECRET'])
+      api_identificator: facebook_app_id,
+      api_token: facebook_api_token)
   end
 
   it 'Returns new image id' do

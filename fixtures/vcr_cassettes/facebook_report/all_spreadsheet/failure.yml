@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=name,id,currency,account_status
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>?access_token=<FACEBOOK_API_TOKEN>&fields=name,id,currency,account_status,disable_reason
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.3
+      - fbbizsdk-ruby-v0.8.0.4
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -19,49 +19,52 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"92a07c2571d2cd58789980c70cafb4d9b0642127"'
+      - '"c2a71885ed573f860744d893211b8aca28984086"'
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.3
+      - v8.0
+      X-Fb-Request-Id:
+      - AXMKXUIE3jzkk_3UT8R9R7H
+      Strict-Transport-Security:
+      - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - BoL0Ut+zrz+
+      - H3cMJaDmEnT
       X-Fb-Rev:
-      - '4504149'
-      X-App-Usage:
-      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      - '1002959156'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Pragma:
       - no-cache
-      Strict-Transport-Security:
-      - max-age=15552000; preload
+      X-Business-Use-Case-Usage:
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_management","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - Jp1g6t/LhzhFdrBS28YIEkFI5RElT1htsjOXw5VPwNm/C0fCYNTEezkNbxbXFOSboXlYVpmVe3pYXmOVcN3BKg==
+      - BANpPTAtutG6YhgyJ3MHN5LQfZAkAmxIpCECDbaJtvWVK33CVtQUMCci5taEZjpFfoGaafelpD7WXgKOWbOe4w==
       Date:
-      - Tue, 06 Nov 2018 12:34:34 GMT
+      - Wed, 11 Nov 2020 11:39:40 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '96'
+      - '102'
     body:
       encoding: UTF-8
-      string: '{"name":"New Sandbox Ad Account","id":"act_<FACEBOOK_ACCOUNT_ID>","currency":"USD","account_status":1}'
-    http_version:
-  recorded_at: Tue, 06 Nov 2018 12:34:34 GMT
+      string: '{"name":"Detailara","id":"act_<FACEBOOK_ACCOUNT_ID>","currency":"USD","account_status":1,"disable_reason":0}'
+  recorded_at: Wed, 11 Nov 2020 11:39:40 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=id,status,name,promoted_object,daily_budget,campaign_id&limit=50&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&fields=id,status,name,promoted_object,daily_budget,campaign_id&limit=50&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.3
+      - fbbizsdk-ruby-v0.8.0.4
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -72,64 +75,57 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"e356a7754d234c47603cccd48b7c53fa81251a52"'
+      - '"bac296630afb87244c096596a013addd670c4c5a"'
+      X-Ad-Account-Usage:
+      - '{"acc_id_util_pct":3.33}'
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.3
+      - v8.0
+      X-Fb-Request-Id:
+      - AbeAEJqgyhGoJoT9FOynKz4
+      Strict-Transport-Security:
+      - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - FBg1FQI0AD6
-      X-Fb-Rev:
-      - '4504149'
+      - B0J61aRAnEm
       X-App-Usage:
       - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      X-Fb-Rev:
+      - '1002959156'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Vary:
       - Accept-Encoding
       Pragma:
       - no-cache
-      Strict-Transport-Security:
-      - max-age=15552000; preload
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - gq/rvDCx5CkYPPSs09IKgffCxFAsc0UTXG9fY1322cBbjyFl96GY2Qd3TlrJBNFcemslmpuXJLFE4+crjg/YuA==
+      - V6/rkGHTm/9h43yj+UzgIILHIK1ZxhbzqwJLHKfhZWRNqrqsgny1oUsH4Dl/oEDvfD21crkDiSN3kaNenK3hzA==
       Date:
-      - Tue, 06 Nov 2018 12:34:34 GMT
+      - Wed, 11 Nov 2020 11:39:40 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '413'
+      - '478'
     body:
       encoding: ASCII-8BIT
-      string: '{"data":[{"id":"120330000053102910","status":"ACTIVE","name":"MX -
-        (18+) - 1","promoted_object":{"pixel_id":"1573475279464976"},"daily_budget":"500000","campaign":{"id":"120330000053102710"}},{"id":"120330000053102010","status":"ACTIVE","name":"MX
-        - (18+) - 2","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"2500","campaign":{"id":"120330000053101810"}},{"id":"120330000053101110","status":"ACTIVE","name":"MX
-        - (18+) - 1","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"500000","campaign":{"id":"120330000053100910"}},{"id":"120330000053100210","status":"ACTIVE","name":"MX
-        - (18+) - 1","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"500000","campaign":{"id":"120330000053100010"}},{"id":"120330000053099310","status":"ACTIVE","name":"MX
-        - (18+) - 1","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"500000","campaign":{"id":"120330000053099110"}},{"id":"120330000053098110","status":"ACTIVE","name":"MX
-        - (18+) - 1","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"500000","campaign":{"id":"120330000053097910"}},{"id":"120330000053097210","status":"ACTIVE","name":"MX
-        - (18+) - 1","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"500000","campaign":{"id":"120330000053097010"}},{"id":"120330000053096310","status":"ACTIVE","name":"MX
-        - (18+) - 1","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"500000","campaign":{"id":"120330000053096010"}},{"id":"120330000053077910","status":"ACTIVE","name":"MX
-        - (18+) - 1","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"500000","campaign":{"id":"120330000053077610"}},{"id":"120330000052968010","status":"PAUSED","name":"adset
-        without bid_amount test","promoted_object":{"pixel_id":"1573475279464976","custom_event_type":"LEAD"},"daily_budget":"10000","campaign":{"id":"120330000052891710"}},{"id":"120330000052900410","status":"PAUSED","name":"adset
-        gender test","promoted_object":{"custom_event_type":"LEAD"},"daily_budget":"100","campaign":{"id":"120330000052891710"}},{"id":"120330000052899110","status":"PAUSED","name":"adset
-        test","promoted_object":{"custom_event_type":"LEAD"},"daily_budget":"100","campaign":{"id":"120330000052891710"}},{"id":"120330000052898310","status":"PAUSED","name":"adset
-        test","daily_budget":"100","campaign":{"id":"120330000052891710"}}],"paging":{"cursors":{"before":"MTIwMzMwMDAwMDUzMTAyOTEw","after":"MTIwMzMwMDAwMDUyODk4MzEw"}}}'
-    http_version:
-  recorded_at: Tue, 06 Nov 2018 12:34:34 GMT
+      string: '{"data":[{"id":"23846117154760168","status":"ACTIVE","name":"adset1auto25","promoted_object":{"pixel_id":"711561972902264","custom_event_type":"LEAD"},"daily_budget":"5000","campaign_id":"23846117154680168"},{"id":"23846103963260168","status":"ACTIVE","name":"adset1auto25","daily_budget":"5000","campaign_id":"23846103963190168"},{"id":"23845891184360168","status":"ACTIVE","name":"Ad
+        Set 1","promoted_object":{"page_id":"101438691740569"},"daily_budget":"100","campaign_id":"23845891184280168"}],"paging":{"cursors":{"before":"QVFIUmFoa2lrbXhVaXE1WTREQndHLWpiMjVLVnM3eTJELVJDME1yb0VQVWJuVmZATVVc5ZAG1lTXRfVC0xLUtOMHlKMDVMYV9TV01CVGllMU44WkoyekFIWWV3","after":"QVFIUnA2X2NaWTFnZAmg1SVJtbnl6cWZAOeXVWZADRuSlltc0p6THZAHZAWZAsYTdQLU9XdHROeGcwN29xX3RTaV80aFNZAMDN6WUhiMU9TX0pwSmI1dHROMDhuWEJn"}}}'
+  recorded_at: Wed, 11 Nov 2020 11:39:41 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/120330000053102910/insights?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v8.0/23846117154760168/insights?access_token=<FACEBOOK_API_TOKEN>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks,frequency&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.3
+      - fbbizsdk-ruby-v0.8.0.4
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -140,51 +136,54 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"b6cc6f46d5945793ad237cb5692fd8649a2df99c"'
-      X-App-Usage:
-      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      - '"1050253aec7b29caff644806927dabfa81406eee"'
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.3
+      - v8.0
+      X-Fb-Request-Id:
+      - ASMGxPX1Q55c6Y9U4YecnF9
+      Strict-Transport-Security:
+      - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - DinEd9Bl3Dl
+      - Ae2TB9mYjOe
       X-Fb-Rev:
-      - '4504149'
+      - '1002959156'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Pragma:
       - no-cache
       X-Fb-Ads-Insights-Throttle:
-      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 0.00}'
-      Strict-Transport-Security:
-      - max-age=15552000; preload
+      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 8.00}'
+      X-Business-Use-Case-Usage:
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - xthzzgRYLoW4r3aPN9iPBHjZ6gNBq1NhkNnR+PICh9kqhy67Ey40k4t+gXlJ+dlLHlgmu568cgbTg34ZDHIoHg==
+      - DiMaYHLXbRuN67SvJdDLfRL0Ib5BsM3hgpKsMG/TAilM/BVeEOCgBfWkovkCV+7v/uX1GOru472fZ4Jia9myMA==
       Date:
-      - Tue, 06 Nov 2018 12:34:35 GMT
+      - Wed, 11 Nov 2020 11:39:41 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '171'
+      - '11'
     body:
       encoding: UTF-8
-      string: '{"data":[{"spend":"10","cpm":"100","inline_link_clicks":"0","date_start":"2018-11-05","date_stop":"2018-11-05"}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"}}}'
-    http_version:
-  recorded_at: Tue, 06 Nov 2018 12:34:35 GMT
+      string: '{"data":[]}'
+  recorded_at: Wed, 11 Nov 2020 11:39:41 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/120330000053102010/insights?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v8.0/23846103963260168/insights?access_token=<FACEBOOK_API_TOKEN>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks,frequency&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - fbbizsdk-ruby-v3.3
+      - fbbizsdk-ruby-v0.8.0.4
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -195,40 +194,101 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"b6cc6f46d5945793ad237cb5692fd8649a2df99c"'
-      X-App-Usage:
-      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      - '"1050253aec7b29caff644806927dabfa81406eee"'
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v3.3
+      - v8.0
+      X-Fb-Request-Id:
+      - AQLsjF-eF4QUWY6xWk1lwBz
+      Strict-Transport-Security:
+      - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - DinEd9Bl3Dl
+      - DhnrqruMa7c
       X-Fb-Rev:
-      - '4504149'
+      - '1002959156'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Pragma:
       - no-cache
       X-Fb-Ads-Insights-Throttle:
-      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 0.00}'
-      Strict-Transport-Security:
-      - max-age=15552000; preload
+      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 8.00}'
+      X-Business-Use-Case-Usage:
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - xthzzgRYLoW4r3aPN9iPBHjZ6gNBq1NhkNnR+PICh9kqhy67Ey40k4t+gXlJ+dlLHlgmu568cgbTg34ZDHIoHg==
+      - "+0Va6GtNkG+aUrMDg8zVf1X0od1kZf5SUX5ss3HpoESrBTYCWza0Rhx/m2qskvvVA6u78dQjjyyfkRpnNAVWfA=="
       Date:
-      - Tue, 06 Nov 2018 12:34:35 GMT
+      - Wed, 11 Nov 2020 11:39:41 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '171'
+      - '11'
     body:
       encoding: UTF-8
-      string: '{"data":[{"spend":"5","cpm":"100","inline_link_clicks":"0","date_start":"2018-11-05","date_stop":"2018-11-05"}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"}}}'
-    http_version:
-  recorded_at: Tue, 06 Nov 2018 12:34:35 GMT
-recorded_with: VCR 4.0.0
+      string: '{"data":[]}'
+  recorded_at: Wed, 11 Nov 2020 11:39:41 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/v8.0/23845891184360168/insights?access_token=<FACEBOOK_API_TOKEN>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks,frequency&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v0.8.0.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"1050253aec7b29caff644806927dabfa81406eee"'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v8.0
+      X-Fb-Request-Id:
+      - AmnWpsOg9eSfM8FvUCAVXVQ
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      X-Fb-Trace-Id:
+      - EFrUp6o34lR
+      X-Fb-Rev:
+      - '1002959227'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      X-Fb-Ads-Insights-Throttle:
+      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 8.00}'
+      X-Business-Use-Case-Usage:
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fb-Debug:
+      - '09jRaLEZmMFkzhB5XniRRdLqfK3G6eUdwhma/NpSuBq+QdeJ40nuwQdOBtjxSdcYsMQkP2nOn35XBWqovHRHug=='
+      Date:
+      - Wed, 11 Nov 2020 11:39:41 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '11'
+    body:
+      encoding: UTF-8
+      string: '{"data":[]}'
+  recorded_at: Wed, 11 Nov 2020 11:39:42 GMT
+recorded_with: VCR 6.0.0

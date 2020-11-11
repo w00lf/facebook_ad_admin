@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adcreatives?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adcreatives?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
     body:
       encoding: UTF-8
       string: object_story_spec=%7B%22page_id%22%3A%22250515082286181%22%2C%22link_data%22%3A%7B%22message%22%3A%22Test+text%22%2C%22link%22%3A%22http%3A%2F%2Fya.ru%22%2C%22attachment_style%22%3A%22link%22%2C%22caption%22%3A%22%22%2C%22name%22%3A%22Text+headline%22%2C%22description%22%3A%22This+is+news+feed%22%2C%22image_hash%22%3A%22a7313faa165852e5acd4a2905d40fdf6%22%7D%7D&object_type=SHARE&url_tags=Ad%3D1%26d%3D20.10%26utm_source%3DHDSDSW%26utm_medium%3D4325365476

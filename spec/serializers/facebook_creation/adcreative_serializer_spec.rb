@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FacebookCreation::AdcreativeSerializer do
+RSpec.xdescribe FacebookCreation::AdcreativeSerializer do
   MAIN_ATTRIBUTES = [
     "Image hash",
     "Website URL",

@@ -1089,7 +1089,7 @@ http_interactions:
   recorded_at: Sun, 11 Nov 2018 09:02:53 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/campaigns?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=name&limit=10
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/campaigns?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=name&limit=10
     body:
       encoding: US-ASCII
       string: ''
@@ -1149,7 +1149,7 @@ http_interactions:
   recorded_at: Sun, 11 Nov 2018 09:02:54 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=name&limit=10
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>&fields=name&limit=10
     body:
       encoding: US-ASCII
       string: ''
@@ -1256,7 +1256,7 @@ http_interactions:
   recorded_at: Sun, 11 Nov 2018 09:02:54 GMT
 - request:
     method: post
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adimages?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adimages?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -1316,7 +1316,7 @@ http_interactions:
   recorded_at: Sun, 11 Nov 2018 09:02:56 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
+    uri: https://graph.facebook.com/v8.0/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
     body:
       encoding: US-ASCII
       string: ''
@@ -1373,7 +1373,7 @@ http_interactions:
   recorded_at: Sun, 11 Nov 2018 09:02:56 GMT
 - request:
     method: post
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adcreatives?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adcreatives?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
     body:
       encoding: UTF-8
       string: object_story_spec=%7B%22page_id%22%3A%22250515082286181%22%2C%22link_data%22%3A%7B%22message%22%3A%22C%C3%B3mo+una+mujer+cambi%C3%B3+su+vida+a+pesar+de+todos+los+desaf%C3%ADos.%22%2C%22link%22%3A%22http%3A%2F%2Fmartzharmony.com%2Fhow-one-family-paid-off-30000-of-credit-card-debt-in-less-than-2-year%22%2C%22attachment_style%22%3A%22link%22%2C%22caption%22%3A%22%22%2C%22name%22%3A%22%C2%BFQui%C3%A9n+hubiera+pensado+que+podr%C3%ADa+cambiar+su+vida%3F%22%2C%22description%22%3A%22-%22%2C%22image_hash%22%3A%2244f7b10573e63b4ab4a0929dd0ef0906%22%7D%7D&object_type=SHARE&url_tags=Ad%3D1%26d%3D1_30.10%26utm_source%3DS1VM33BM%26utm_medium%3D191490645002195
@@ -1428,7 +1428,7 @@ http_interactions:
   recorded_at: Sun, 11 Nov 2018 09:03:01 GMT
 - request:
     method: post
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/ads?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/ads?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
     body:
       encoding: UTF-8
       string: adset_id=23843093121540049&creative=%7B%22creative_id%22%3A%2223843104919190049%22%7D&name=Ads+1+-+take+2&status=ACTIVE

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/v3.3/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
+    uri: https://graph.facebook.com/v8.0/me/accounts?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=<FACEBOOK_SECRET_PROOF>
     body:
       encoding: US-ASCII
       string: ''

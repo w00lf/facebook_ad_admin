@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FacebookCreation::AdsetService do
+RSpec.xdescribe FacebookCreation::AdsetService do
   CREATED_CAMPAIGN_ID = '23843093131260049'
   CREATED_ADSET_ID = '23843093138150049'
   let(:attributes) {

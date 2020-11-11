@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://graph.facebook.com/v3.3/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
+    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&appsecret_proof=c5d4f1eebf39afa8ffbd8366d1972928228e19175135d7a99686a7e11b4fbcc2
     body:
       encoding: UTF-8
       string: bid_strategy=LOWEST_COST_WITHOUT_CAP&billing_event=IMPRESSIONS&campaign_id=23843093131260049&daily_budget=500000&name=MX+-+%2818%2B%29+-+1&optimization_goal=OFFSITE_CONVERSIONS&promoted_object=%7B%22pixel_id%22%3A%222179086309031083%22%2C%22custom_event_type%22%3A%22LEAD%22%7D&targeting=%7B%22geo_locations%22%3A%7B%22countries%22%3A%5B%22MX%22%5D%7D%2C%22age_min%22%3A%2218%22%2C%22age_max%22%3A%2265%22%2C%22locales%22%3A%5B23%5D%2C%22publisher_platforms%22%3A%5B%22facebook%22%5D%2C%22facebook_positions%22%3A%5B%22feed%22%5D%7D

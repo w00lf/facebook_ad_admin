@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FacebookCreation::AdcreativeService do
+RSpec.xdescribe FacebookCreation::AdcreativeService do
   CREATED_ADCREATIVE = '23843093148650049'.freeze
 
   let(:attributes) {
