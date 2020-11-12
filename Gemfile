@@ -36,7 +36,7 @@ gem 'sidekiq-scheduler', '~> 3.0'
 gem 'config'
 
 # Integrations
-gem 'facebookbusiness', git: 'git@github.com:facebook/facebook-ruby-business-sdk.git'
+gem 'facebookbusiness', '~> 0.8.0'
 gem 'google_drive', '2.1.11'
 
 gem 'money', '~>6.13.0'
