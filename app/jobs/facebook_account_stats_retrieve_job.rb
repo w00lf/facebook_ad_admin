@@ -59,7 +59,6 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     end
     parse_result.update!(status: 'ok')
   rescue => e
-    byebug
     parse_result.update!(status: 'error', error_type: e.class, error_text: e.message)
   ensure
     log_file.close
