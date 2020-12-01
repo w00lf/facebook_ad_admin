@@ -43,7 +43,7 @@ class FacebookAccountApiRepresentation < FacebookAPIBaseRepresenter
   end
 
   def campaigns
-    @campaigns ||= object.campaigns(fields: %w[objective])
+    @campaigns ||= object.campaigns(fields: %w[objective name])
   end
 
   def adcreatives(limit: 50, fields: %w[id object_id effective_object_story_id])

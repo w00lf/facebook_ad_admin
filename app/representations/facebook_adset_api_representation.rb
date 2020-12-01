@@ -52,6 +52,11 @@ class FacebookAdsetApiRepresentation < FacebookAPIBaseRepresenter
     with_exception_control { promoted_object.custom_event_type.to_s }
   end
 
+  def campaign_name
+    campaign = with_exception_control { parent.campaigns.find{|n| n['id'] == campaign_id } }
+    campaign.name if campaign
+  end
+
   def conversion_action
     result = TARGET_CONVERSION_BY_TYPE.fetch(promoted_object_event_type, nil)
     if result.nil?

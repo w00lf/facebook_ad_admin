@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200511133031) do
+ActiveRecord::Schema.define(version: 20201130073947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(version: 20200511133031) do
     t.text "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "parsed_data"
+    t.date "report_date"
     t.index ["facebook_account_id"], name: "index_parse_results_on_facebook_account_id"
   end
 

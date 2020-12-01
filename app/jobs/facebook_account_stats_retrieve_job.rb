@@ -40,26 +40,29 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
 
     report_formated_date = date.strftime('%d/%m/%Y')
 
-    result =  ad_account.adsets.map do |adset|
-                result = serialize_adset_stats(adset, ad_account, report_formated_date, binom_costs_hash, binom_campaigns, binom_adsets)
-                # Only run one time for tests
-                if Rails.env.test? && result
-                  break result
-                else
-                  result
-                end
-              end.compact
+    google_results = []
+    parsed_results = []
+    ad_account.adsets.map do |adset|
+      result, additional = serialize_adset_stats(adset, ad_account, report_formated_date, binom_costs_hash, binom_campaigns, binom_adsets)
+      # Only run one time for tests
+      if result
+        google_results.push(result)
+        parsed_results.push(COLUMN_HEADERS.zip(result).to_h.merge(additional))
+      end
+      break if Rails.env.test?
+    end
 
-    logger.info(result)
+    logger.info(parsed_results)
 
-    SendToGoogleSpreadsheetFacebookAccountJob.perform_later(date_unix, facebook_account_id, result, COLUMN_HEADERS)
+    SendToGoogleSpreadsheetFacebookAccountJob.perform_later(date_unix, facebook_account_id, google_results, COLUMN_HEADERS)
     logger.info(binom_costs_hash)
     binom_costs_hash.each do |campaign_hash|
       SendToBinomApiFacebookCampaignJob.perform_later(date_unix, campaign_hash['binom_server_id'], campaign_hash['campaign_id'], campaign_hash['costs'], campaign_hash['currency'], campaign_hash['adset_name'])
     end
-    parse_result.update!(status: 'ok')
+    parse_result.update!(status: 'ok', parsed_data: parsed_results, report_date: date.to_date)
   rescue => e
     parse_result.update!(status: 'error', error_type: e.class, error_text: e.message)
+    raise(e) if Rails.env.test?
   ensure
     log_file.close
   end
@@ -119,23 +122,28 @@ class FacebookAccountStatsRetrieveJob < ApplicationJob
     else
       logger.warn("Cannot find binom_campaign for id - #{adset.campaign.id}")
     end
-
     [
-      ad_account.formated_account_status,
-      report_formated_date,
-      ad_account.name,
-      adset.status,
-      adset.name,
-      adset_unique_actions,
-      adset.formated_daily_budget,
-      adset_spend,
-      adset_unique_action_cost,
-      insight_data.formated_cpm,
-      insight_data.formated_cost_per_inline_link_click,
-      insight_data.formated_inline_link_click_ctr,
-      insight_data.inline_link_clicks,
-      insight_data.frequency,
-      adset.quality_ranking
+      [
+        ad_account.formated_account_status,
+        report_formated_date,
+        ad_account.name,
+        adset.status,
+        adset.name,
+        adset_unique_actions,
+        adset.formated_daily_budget,
+        adset_spend,
+        adset_unique_action_cost,
+        insight_data.formated_cpm,
+        insight_data.formated_cost_per_inline_link_click,
+        insight_data.formated_inline_link_click_ctr,
+        insight_data.inline_link_clicks,
+        insight_data.frequency,
+        adset.quality_ranking
+      ],
+      {
+        ad_name: adset.ads.first.name,
+        campaign_name: adset.campaign_name
+      }
     ]
   end
 end

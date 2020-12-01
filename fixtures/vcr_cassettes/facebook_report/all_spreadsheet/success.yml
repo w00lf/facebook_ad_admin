@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>?access_token=<FACEBOOK_API_TOKEN>&fields=name,id,currency,account_status,disable_reason
+    uri: https://graph.facebook.com/v9.0/act_<FACEBOOK_ACCOUNT_ID>?access_token=<FACEBOOK_API_TOKEN>&fields=name,id,currency,account_status,disable_reason
     body:
       encoding: US-ASCII
       string: ''
@@ -19,46 +19,46 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"c2a71885ed573f860744d893211b8aca28984086"'
+      - '"54aedd80792ccb11068e6b1b65685442701aee51"'
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v8.0
+      - v9.0
       X-Fb-Request-Id:
-      - AM91x2HFPhp2IwtlU670klu
+      - AUVJQwAtgXB6-0aYi0eDz05
       Strict-Transport-Security:
       - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - Fnl6mtODbXL
+      - EDhyJtgeICx
       X-Fb-Rev:
-      - '1002959156'
+      - '1003026731'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Pragma:
       - no-cache
       X-Business-Use-Case-Usage:
-      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_management","call_count":0,"total_cputime":0,"total_time":0,"estimated_time_to_regain_access":0}]}'
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_management","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - "+Ayzw5MJjGnxi7EwYMEtpet74dLlNBAXPK8WBNczLs2MpQvVgOGfu9S6R34IRqVPQ96/SNTUoQB+ZYxna8BJaA=="
+      - Y/g8ardKwad+ydSawCJqvl/81dpDPJq/M2KDm4P0PN8Beil942m9eFl07i9jKZWsPRk9mvRRl+9l5EV7PkJgZg==
       Date:
-      - Wed, 11 Nov 2020 11:39:38 GMT
+      - Tue, 01 Dec 2020 14:15:41 GMT
       Alt-Svc:
       - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '102'
+      - '105'
     body:
       encoding: UTF-8
-      string: '{"name":"Detailara","id":"act_<FACEBOOK_ACCOUNT_ID>","currency":"USD","account_status":1,"disable_reason":0}'
-  recorded_at: Wed, 11 Nov 2020 11:39:38 GMT
+      string: '{"name":"Heartstrings","id":"act_<FACEBOOK_ACCOUNT_ID>","currency":"USD","account_status":2,"disable_reason":1}'
+  recorded_at: Tue, 01 Dec 2020 14:15:41 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v8.0/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&fields=id,status,name,promoted_object,daily_budget,campaign_id&limit=50&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v9.0/act_<FACEBOOK_ACCOUNT_ID>/adsets?access_token=<FACEBOOK_API_TOKEN>&fields=id,status,name,promoted_object,daily_budget,campaign_id&limit=50&time_range%5Bsince%5D=2020-11-30&time_range%5Buntil%5D=2020-11-30
     body:
       encoding: US-ASCII
       string: ''
@@ -75,7 +75,7 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"bac296630afb87244c096596a013addd670c4c5a"'
+      - '"6471c5e2ec2aa9735fcbc5988a3c8272f6e84a83"'
       X-Ad-Account-Usage:
       - '{"acc_id_util_pct":0}'
       Expires:
@@ -83,17 +83,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v8.0
+      - v9.0
       X-Fb-Request-Id:
-      - AqUBGNR-zzXPuJhiGmJxGYb
+      - AlgFYQ_MBoy5DMBb9pccwZ1
       Strict-Transport-Security:
       - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - GT9pSoFstZD
+      - Cl+JK/OFOLG
       X-App-Usage:
       - '{"call_count":0,"total_cputime":0,"total_time":0}'
       X-Fb-Rev:
-      - '1002959156'
+      - '1003026731'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Vary:
@@ -103,23 +103,23 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - 4RLg+h4w7SD0I2z7AUff4yWMN3dfnbTzvKCnfIKoDyrVSIeo+w7XCy69yDI4FTNYwq25nAHh3PIWbNKBpVgCzg==
+      - xwE7d3MgfXPKuXbbqki0673Tm8rxFjXUOvxOC/fmPK9l8+jw1NFq3pnGAIMxihbtLWotn/A3H9kD7CB9kkqUOw==
       Date:
-      - Wed, 11 Nov 2020 11:39:38 GMT
+      - Tue, 01 Dec 2020 14:15:42 GMT
       Alt-Svc:
       - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '478'
+      - '523'
     body:
       encoding: ASCII-8BIT
-      string: '{"data":[{"id":"23846117154760168","status":"ACTIVE","name":"adset1auto25","promoted_object":{"pixel_id":"711561972902264","custom_event_type":"LEAD"},"daily_budget":"5000","campaign_id":"23846117154680168"},{"id":"23846103963260168","status":"ACTIVE","name":"adset1auto25","daily_budget":"5000","campaign_id":"23846103963190168"},{"id":"23845891184360168","status":"ACTIVE","name":"Ad
-        Set 1","promoted_object":{"page_id":"101438691740569"},"daily_budget":"100","campaign_id":"23845891184280168"}],"paging":{"cursors":{"before":"QVFIUmFoa2lrbXhVaXE1WTREQndHLWpiMjVLVnM3eTJELVJDME1yb0VQVWJuVmZATVVc5ZAG1lTXRfVC0xLUtOMHlKMDVMYV9TV01CVGllMU44WkoyekFIWWV3","after":"QVFIUnA2X2NaWTFnZAmg1SVJtbnl6cWZAOeXVWZADRuSlltc0p6THZAHZAWZAsYTdQLU9XdHROeGcwN29xX3RTaV80aFNZAMDN6WUhiMU9TX0pwSmI1dHROMDhuWEJn"}}}'
-  recorded_at: Wed, 11 Nov 2020 11:39:39 GMT
+      string: '{"data":[{"id":"23846179992640367","status":"ACTIVE","name":"adset1automatic24","promoted_object":{"pixel_id":"416938009327585","custom_event_type":"LEAD"},"daily_budget":"5000","campaign_id":"23846179992580367"},{"id":"23846154233520367","status":"ACTIVE","name":"Opslag:
+        \"f\u00e5 \u00f8je p\u00e5 det skjulte dyrs tid\"","promoted_object":{"page_id":"101656805128883"},"campaign_id":"23846154233460367"},{"id":"23846150030600367","status":"ACTIVE","name":"Adset1","promoted_object":{"page_id":"101656805128883"},"daily_budget":"1000","campaign_id":"23846150030500367"}],"paging":{"cursors":{"before":"QVFIUlpmUkdZAcl9WWkdMLWs1anY0N2VwTUJpXzExd1Ixd0V2eEhGUjBfWDJ4dW1uTHV1bERVNmFOYWMxVlNmLWIzUTU4VTdxcGI5YUVBN3dIckFCRVl2Ml9n","after":"QVFIUlFicjBtcW5Mal9YelpyOGtOeGthSzd0OHNIXzRQVk5pNm05QWI4NF9Kb1NKVVJKN2ZAac2FSSTBfNXNQOU90N2FYSF8tMnZApUVZARRkJOem9tWnNtQW5n"}}}'
+  recorded_at: Tue, 01 Dec 2020 14:15:42 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v8.0/23846117154760168/insights?access_token=<FACEBOOK_API_TOKEN>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks,frequency&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v9.0/23846179992640367/insights?access_token=<FACEBOOK_API_TOKEN>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks,frequency&limit=10&time_range%5Bsince%5D=2020-11-30&time_range%5Buntil%5D=2020-11-30
     body:
       encoding: US-ASCII
       string: ''
@@ -136,50 +136,50 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"1050253aec7b29caff644806927dabfa81406eee"'
-      X-Fb-Insights-Stability-Throttle:
-      - '{"throttled":false,"backend_qps":{"actual_score":0,"limit":300000},"complexity_score":{"actual_score":0,"limit":16000}}'
+      - '"dab467d498c370dc4c5f719ba3cce5fbb0b2fdf9"'
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v8.0
+      - v9.0
       X-Fb-Request-Id:
-      - A_VfUOgZZDfS4LlEJZ4Wbzs
+      - ACEAzQHtYKQJ_95978TMghc
       Strict-Transport-Security:
       - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - DwyN+n02lN0
+      - HAtHCZuknQl
       X-Fb-Rev:
-      - '1002959156'
+      - '1003026731'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
+      Vary:
+      - Accept-Encoding
       Pragma:
       - no-cache
       X-Fb-Ads-Insights-Throttle:
       - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 0.00}'
       X-Business-Use-Case-Usage:
-      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":0,"total_cputime":0,"total_time":0,"estimated_time_to_regain_access":0}]}'
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - j+MBQ4Ro7J2kvfkVEY0RQm/si7rugpvT6EbZts+gUGrVqgbjJBs4+TDXrQPPm/STe7tso+ZRCh4XmXsMxyocxQ==
+      - TJ12ze7ll/Kld5O8DyKtwAowamLtJw1OW9sCcLh23FwtGEo19QttBLdw/3ATdRBmxhevLUcNUtf693CnaJm4ag==
       Date:
-      - Wed, 11 Nov 2020 11:39:39 GMT
+      - Tue, 01 Dec 2020 14:15:42 GMT
       Alt-Svc:
       - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '11'
+      - '304'
     body:
-      encoding: UTF-8
-      string: '{"data":[]}'
-  recorded_at: Wed, 11 Nov 2020 11:39:39 GMT
+      encoding: ASCII-8BIT
+      string: '{"data":[{"spend":"25.38","cpm":"23.587361","cost_per_inline_link_click":"1.269","inline_link_click_ctr":"1.858736","actions":[{"action_type":"landing_page_view","value":"13"},{"action_type":"link_click","value":"20"},{"action_type":"offsite_conversion.fb_pixel_view_content","value":"14"},{"action_type":"post_reaction","value":"1"},{"action_type":"post_engagement","value":"21"},{"action_type":"page_engagement","value":"21"},{"action_type":"omni_view_content","value":"14"},{"action_type":"view_content","value":"14"}],"inline_link_clicks":"20","frequency":"1.03164","date_start":"2020-11-30","date_stop":"2020-11-30"}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"}}}'
+  recorded_at: Tue, 01 Dec 2020 14:15:42 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v8.0/23846103963260168/insights?access_token=<FACEBOOK_API_TOKEN>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks,frequency&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v9.0/23846179992640367?access_token=<FACEBOOK_API_TOKEN>&fields=id,status,name,promoted_object,daily_budget,campaign_id,campaign
     body:
       encoding: US-ASCII
       string: ''
@@ -196,50 +196,48 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"1050253aec7b29caff644806927dabfa81406eee"'
-      X-Fb-Insights-Stability-Throttle:
-      - '{"throttled":false,"backend_qps":{"actual_score":0,"limit":300000},"complexity_score":{"actual_score":0,"limit":16000}}'
+      - '"727f1fc6066babe6ee0320b9b5f10e190f944af6"'
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v8.0
+      - v9.0
       X-Fb-Request-Id:
-      - AJZw0joK-ZV52RTz77JFB7e
+      - ArULev6ecLXFZgTAwRTKo5i
       Strict-Transport-Security:
       - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - AxuEXwr3xYU
+      - GuBG35mEk/C
       X-Fb-Rev:
-      - '1002959156'
+      - '1003026767'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
+      Vary:
+      - Accept-Encoding
       Pragma:
       - no-cache
-      X-Fb-Ads-Insights-Throttle:
-      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 0.00}'
       X-Business-Use-Case-Usage:
-      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":0,"total_cputime":0,"total_time":0,"estimated_time_to_regain_access":0}]}'
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_management","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - iceTk141EoCqtO8fdexww/o6hqWN0EfZAim0Nr/2Nilp9a5xXX7fej2ZJCH7GjvMJwzn8VdLtEsd2hbLzUp4tg==
+      - HABV1G9l+zq3AQ6kq0QOt34yh8a9nIM5uxhXr3AVlG0chkpeJTK/1yVoZrEGBv83/SUlhVEJq5nXLXExrj3UuA==
       Date:
-      - Wed, 11 Nov 2020 11:39:39 GMT
+      - Tue, 01 Dec 2020 14:15:42 GMT
       Alt-Svc:
       - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '11'
+      - '186'
     body:
-      encoding: UTF-8
-      string: '{"data":[]}'
-  recorded_at: Wed, 11 Nov 2020 11:39:39 GMT
+      encoding: ASCII-8BIT
+      string: '{"id":"23846179992640367","status":"ACTIVE","name":"adset1automatic24","promoted_object":{"pixel_id":"416938009327585","custom_event_type":"LEAD"},"daily_budget":"5000","campaign_id":"23846179992580367","campaign":{"id":"23846179992580367"}}'
+  recorded_at: Tue, 01 Dec 2020 14:15:42 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/v8.0/23845891184360168/insights?access_token=<FACEBOOK_API_TOKEN>&fields=spend,cpm,cost_per_inline_link_click,inline_link_click_ctr,actions,inline_link_clicks,frequency&limit=10&time_range%5Bsince%5D=2018-11-05&time_range%5Buntil%5D=2018-11-05
+    uri: https://graph.facebook.com/v9.0/23846179992640367/ads?access_token=<FACEBOOK_API_TOKEN>&limit=10
     body:
       encoding: US-ASCII
       string: ''
@@ -256,7 +254,67 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"1050253aec7b29caff644806927dabfa81406eee"'
+      - '"c48bbb0d9d62c0e602997288e2452487d2a6a16d"'
+      X-Ad-Account-Usage:
+      - '{"acc_id_util_pct":0}'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v9.0
+      X-Fb-Request-Id:
+      - A8j2qBtKjX5o-kDFt4OFRdz
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      X-Fb-Trace-Id:
+      - DU2/P/YqW57
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      X-Fb-Rev:
+      - '1003026767'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fb-Debug:
+      - V7cj4N3m4BqO5WZsrU+EeRAJuCSk2HFgvJD6nNORS0JwoZnUrhtPs2BtzOFr4/lxMTzQmKWGzQgFyBtlR9rUUQ==
+      Date:
+      - Tue, 01 Dec 2020 14:15:42 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '209'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":"23846179992660367"}],"paging":{"cursors":{"before":"QVFIUlpWc0ZASSlF0X1ZAFWU1wTTdZASVlITjE4N3JtMy1UNVh4RTBuNlZAsQmcwbVRzS0s3am9QNGt5eS1fVE0wcVBUYUpNSkYwN016dHBfRmVtSWtYbmlTbEZAR","after":"QVFIUlpWc0ZASSlF0X1ZAFWU1wTTdZASVlITjE4N3JtMy1UNVh4RTBuNlZAsQmcwbVRzS0s3am9QNGt5eS1fVE0wcVBUYUpNSkYwN016dHBfRmVtSWtYbmlTbEZAR"}}}'
+  recorded_at: Tue, 01 Dec 2020 14:15:42 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/v9.0/23846179992660367/insights?access_token=<FACEBOOK_API_TOKEN>&fields=quality_ranking&limit=10&time_range%5Bsince%5D=2020-11-30&time_range%5Buntil%5D=2020-11-30
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v0.8.0.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"654e4f83c62634f46f2e5464ba5cb557837122dc"'
       X-Fb-Insights-Stability-Throttle:
       - '{"throttled":false,"backend_qps":{"actual_score":0,"limit":300000},"complexity_score":{"actual_score":0,"limit":16000}}'
       Expires:
@@ -264,37 +322,153 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Facebook-Api-Version:
-      - v8.0
+      - v9.0
       X-Fb-Request-Id:
-      - ACS-lJYxItTE4_kktsS5PHy
+      - A0QVURqtoo3DuJkwMgFkCA5
       Strict-Transport-Security:
       - max-age=15552000; preload
       X-Fb-Trace-Id:
-      - CnCrcb7ANO1
+      - FlLNdDhMOvI
       X-Fb-Rev:
-      - '1002959156'
+      - '1003026767'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Pragma:
       - no-cache
       X-Fb-Ads-Insights-Throttle:
-      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 0.00}'
+      - '{"app_id_util_pct": 0.00,"acc_id_util_pct": 1.67}'
       X-Business-Use-Case-Usage:
-      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":0,"total_cputime":0,"total_time":0,"estimated_time_to_regain_access":0}]}'
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_insights","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Debug:
-      - 0rvvbR1QQ+itCzy8HI/tvZIxCUSSu63MWdVSTsbLmvD7DstevuRpJgdPHm8q3MQuPFR20rVlWgltdjO01cT5gQ==
+      - wP6JWWy8Sif27wJ12SBLdTQaOymRi/4BkcLka8TgvKSklk7OSwcODFdvBRlxaMp+H2WFo88heAid0aPEGoQNgg==
       Date:
-      - Wed, 11 Nov 2020 11:39:39 GMT
+      - Tue, 01 Dec 2020 14:15:43 GMT
       Alt-Svc:
       - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
       Connection:
       - keep-alive
       Content-Length:
-      - '11'
+      - '158'
     body:
       encoding: UTF-8
-      string: '{"data":[]}'
-  recorded_at: Wed, 11 Nov 2020 11:39:40 GMT
+      string: '{"data":[{"quality_ranking":"BELOW_AVERAGE_20","date_start":"2020-11-30","date_stop":"2020-11-30"}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"}}}'
+  recorded_at: Tue, 01 Dec 2020 14:15:43 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/v9.0/23846179992660367?access_token=<FACEBOOK_API_TOKEN>&fields=id,name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v0.8.0.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"b0416b28aec8f10825f2a7c2c653300eecd6b5e2"'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v9.0
+      X-Fb-Request-Id:
+      - AmiBctTfu36_bzoqcGTZcm3
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      X-Fb-Trace-Id:
+      - C4nJuVttdRU
+      X-Fb-Rev:
+      - '1003026767'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      X-Business-Use-Case-Usage:
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_management","call_count":2,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fb-Debug:
+      - 2BTMWCX9ww3cg7bTBjDHMGY1Fb8JmYPde7wquficR6GEtCp7fq4nKZzOYTxrjzSYBHkF9fBp9Iz5UUN3vO36+A==
+      Date:
+      - Tue, 01 Dec 2020 14:15:43 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+    body:
+      encoding: UTF-8
+      string: '{"id":"23846179992660367","name":"ad1"}'
+  recorded_at: Tue, 01 Dec 2020 14:15:44 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/v9.0/act_<FACEBOOK_ACCOUNT_ID>/campaigns?access_token=<FACEBOOK_API_TOKEN>&fields=objective,name&limit=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - fbbizsdk-ruby-v0.8.0.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"b76f3eb7adb11dc08abf587fa7ba9bf58759608c"'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v9.0
+      X-Fb-Request-Id:
+      - AQv8_hZolCDFxoB1GrbWf86
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      X-Fb-Trace-Id:
+      - Gtos5fov7EE
+      X-Fb-Rev:
+      - '1003026767'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      X-Business-Use-Case-Usage:
+      - '{"<FACEBOOK_ACCOUNT_ID>":[{"type":"ads_management","call_count":2,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fb-Debug:
+      - Kl16gbrnQvXwWD3KXLquLQW12/tV8meAYJJ4RVGO1miLMwaZ48yA9XRoxb3nhcDBmtO5JSwJr0jSrEZlp6Vnyw==
+      Date:
+      - Tue, 01 Dec 2020 14:15:44 GMT
+      Alt-Svc:
+      - h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '454'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"objective":"CONVERSIONS","name":"SG - Heartstrings - Conversions","id":"23846179992580367"},{"objective":"POST_ENGAGEMENT","name":"Opslag:
+        \"f\u00e5 \u00f8je p\u00e5 det skjulte dyrs tid\"","id":"23846154233460367"},{"objective":"PAGE_LIKES","name":"Like
+        Campaign: Heartstrings","id":"23846150030500367"}],"paging":{"cursors":{"before":"QVFIUlNycGRRajZAqRV9pdGU5LWVVc3lOT3NaclZAZATVR1NzZAlVGxEX0ZAhMktBWHVQaWY4d1hUN2ZApVU9EdGVsRkE4S21CS0xBdW05WTBnNWdmN3k1dlNFdkZAn","after":"QVFIUnlxMVBabFBmRHluVjhnb2ZA0aEtQa1VoZAW1LUnhCMmV0WjhfYXFyeGs3MThnVE1wRk1LcWdfRGhWc2tQaUpnSGw1bXREYkVYZADlJaUp6X2hQd29jbmN3"}}}'
+  recorded_at: Tue, 01 Dec 2020 14:15:44 GMT
 recorded_with: VCR 6.0.0
